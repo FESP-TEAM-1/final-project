@@ -4,6 +4,7 @@ import styles from "styles/main/MainPage.module.css";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { YoutubeItem } from "types/mainItem";
+import Header from "components/layout/Header";
 
 const MainPage: React.FC = () => {
   const fetchYoutubeList = async () => {
@@ -25,20 +26,23 @@ const MainPage: React.FC = () => {
   if (error) return <>{"An error has occurred: " + error.message}</>;
 
   return (
-    <main className={styles.main}>
-      {youtubeData.items.map((item: YoutubeItem) => {
-        const { snippet } = item;
-        const { url: src } = snippet.thumbnails.standard;
-        const { title, description, publishedAt, channelTitle } = snippet;
+    <>
+      <Header />
+      <main className={styles.main}>
+        {youtubeData.items.map((item: YoutubeItem) => {
+          const { snippet } = item;
+          const { url: src } = snippet.thumbnails.standard;
+          const { title, description, publishedAt, channelTitle } = snippet;
 
-        return (
-          <Card
-            key={item.id}
-            item={{ src, title, description, publishedAt, channelTitle }}
-          />
-        );
-      })}
-    </main>
+          return (
+            <Card
+              key={item.id}
+              item={{ src, title, description, publishedAt, channelTitle }}
+            />
+          );
+        })}
+      </main>
+    </>
   );
 };
 
