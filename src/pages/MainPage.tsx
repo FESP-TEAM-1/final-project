@@ -30,16 +30,7 @@ const MainPage: React.FC = () => {
       <Header />
       <main className={styles.main}>
         {youtubeData.items.map((item: YoutubeItem) => {
-          const { snippet } = item;
-          const { url: src } = snippet.thumbnails.standard;
-          const { title, description, publishedAt, channelTitle } = snippet;
-
-          return (
-            <Card
-              key={item.id}
-              item={{ src, title, description, publishedAt, channelTitle }}
-            />
-          );
+          return <Card key={item.id} item={item} />;
         })}
       </main>
     </>
