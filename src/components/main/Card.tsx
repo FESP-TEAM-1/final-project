@@ -23,7 +23,7 @@ const Card: React.FC<CardItemType> = ({ item }) => {
           <img src={src} alt="" className={styles["card__cover__img"]} />
         </div>
         <p className={styles["card__channel-title"]}>{channelTitle}</p>
-        <h3 className={styles["card__title"]}>{title}</h3>
+        <h3 className={`${styles["card__title"]} ellipsis-multi`}>{title}</h3>
         <p className={`${styles["card__description"]} ellipsis`}>
           {description}
         </p>

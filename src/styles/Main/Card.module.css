@@ -31,13 +31,16 @@
 
 .card__title {
   font-size: 1rem;
-  font-family: "BMHANNAPro";
+  font-weight: bold;
 }
 
 .card__description {
   font-size: 0.875rem;
 }
 
+.card__published-at {
+  font-size: 0.75rem;
+}
 .card__published-at {
   font-size: 0.75rem;
 }
