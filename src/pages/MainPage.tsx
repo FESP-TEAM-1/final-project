@@ -1,47 +1,43 @@
-import React, { useState, useEffect } from "react";
-import Card from "components/common/Card";
-import styles from "styles/Main/MainPage.module.css";
+import React from "react";
+import Card from "components/main/Card";
+import styles from "styles/main/MainPage.module.css";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { YoutubeItem } from "types/mainItem";
 
-interface PropsType {
-  src: string;
-  title: string;
-  description: string;
-  publishedAt: string;
-  channelTitle: string;
-}
-
-const MainPage = () => {
-  const [item, setItem] = useState<PropsType>({
-    src: "https://i.ytimg.com/vi/BmC1cmItiGs/sddefault.jpg",
-    title: "타이틀",
-    description:
-      "11주년에도 또 모이기로 약속해 (feat. 응답하라 칠봉이)\n\n#채널십오야 #와글와글 #유료광고포함 \n#응답하라1994 #응사",
-    publishedAt: "생성 날짜",
-    channelTitle: "채널 이름",
-  });
-
-  const handleResize = () => {
-    console.log(window.innerWidth);
+const MainPage: React.FC = () => {
+  const fetchYoutubeList = async () => {
+    const { data } = await axios.get("/videos/popular.json");
+    return data;
   };
 
-  useEffect(() => {
-    window.addEventListener("resize", handleResize);
-    return () => {
-      // cleanup
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  const {
+    isLoading,
+    error,
+    data: youtubeData,
+  } = useQuery({
+    queryKey: ["youtubeData"],
+    queryFn: fetchYoutubeList,
+  });
+
+  if (isLoading) return <>"Loading..."</>;
+
+  if (error) return <>{"An error has occurred: " + error.message}</>;
 
   return (
     <main className={styles.main}>
-      <Card item={item} />
-      <Card item={item} />
-      <Card item={item} />
-      <Card item={item} />
-      <Card item={item} />
-      <Card item={item} />
-      <Card item={item} />
-      <Card item={item} />
+      {youtubeData.items.map((item: YoutubeItem) => {
+        const { snippet } = item;
+        const { url: src } = snippet.thumbnails.standard;
+        const { title, description, publishedAt, channelTitle } = snippet;
+
+        return (
+          <Card
+            key={item.id}
+            item={{ src, title, description, publishedAt, channelTitle }}
+          />
+        );
+      })}
     </main>
   );
 };
