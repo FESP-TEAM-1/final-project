@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "styles/common/Card.module.css";
+import styles from "styles/main/Card.module.css";
 
 interface CardItemType {
   item: CardType;
