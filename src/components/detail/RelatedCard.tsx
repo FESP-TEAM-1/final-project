@@ -1,46 +1,46 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useItemStore } from "stores/useItemStore";
-import styles from "styles/main/Card.module.css";
-import { YoutubeItem } from "types/mainItem";
 import getElapsedTime from "utils/getElapsedTime";
+import { useItemStore } from "stores/useItemStore";
+import { ChannelItem } from "types/detailItem";
+import styles from "styles/detail/RelatedCard.module.css";
 import decodeHTMLEntities from "utils/setDecodeHTMLEntities";
 
-interface CardItemType {
-  item: YoutubeItem;
+interface RelatedCardType {
+  item: ChannelItem;
 }
 
-const Card: React.FC<CardItemType> = ({ item }) => {
+const RelatedCard: React.FC<RelatedCardType> = ({ item }) => {
   const navigate = useNavigate();
   const { setItemInfo } = useItemStore();
-  const { id } = item;
-  const { url: src } = item.snippet.thumbnails.standard;
-  const { channelTitle, title, description, publishedAt, channelId } =
+  const { url: src } = item.snippet.thumbnails.high;
+  const {
+    id: { videoId },
+  } = item;
+  const { title, channelTitle, channelId, publishedAt, description } =
     item.snippet;
 
   const handleClickMove = () => {
     setItemInfo({ title, channelTitle, description });
-    navigate(`/videos?id=${id}&channelId=${channelId}`);
+    navigate(`/videos?id=${videoId}&channelId=${channelId}`);
   };
+
   return (
     <>
       <article className={styles["card"]}>
         <div className={styles["card__cover"]} onClick={handleClickMove}>
           <img src={src} alt="" className={styles["card__cover__img"]} />
         </div>
-        <Link to={`/channel?${channelId}`} style={{ width: "fit-content" }}>
-          <span className={styles["card__channel-title"]}>
-            {decodeHTMLEntities(channelTitle)}
-          </span>
-        </Link>
         <div onClick={handleClickMove}>
           <h3 className={`${styles["card__title"]} ellipsis`}>
             {decodeHTMLEntities(title)}
           </h3>
         </div>
-        <p className={`${styles["card__description"]} ellipsis-multi`}>
-          {decodeHTMLEntities(description)}
-        </p>
+        <Link to={`/channel?${channelId}`} style={{ width: "fit-content" }}>
+          <span className={styles["card__channel-title"]}>
+            {decodeHTMLEntities(channelTitle)}
+          </span>
+        </Link>
         <p className={styles["card__published-at"]}>
           {getElapsedTime(publishedAt)}
         </p>
@@ -49,4 +49,4 @@ const Card: React.FC<CardItemType> = ({ item }) => {
   );
 };
 
-export default Card;
+export default RelatedCard;

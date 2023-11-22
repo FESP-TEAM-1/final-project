@@ -1,0 +1,20 @@
+.detail-main {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.video-section {
+  margin: 3rem 0 5rem;
+}
+
+.related-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.related-videos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  margin: 25px auto 50px;
+  gap: 3.125rem 1.25rem;
+}
