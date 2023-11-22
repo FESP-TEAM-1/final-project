@@ -1,0 +1,12 @@
+.header {
+  display: flex;
+  align-items: center;
+  font-size: 3rem;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+.header svg {
+  font-size: 3rem;
+  margin-right: 1rem;
+}

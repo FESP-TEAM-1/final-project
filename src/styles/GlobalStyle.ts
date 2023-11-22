@@ -1,5 +1,5 @@
-import { createGlobalStyle } from 'styled-components';
-import reset from 'styled-reset';
+import { createGlobalStyle } from "styled-components";
+import reset from "styled-reset";
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -18,6 +18,41 @@ const GlobalStyle = createGlobalStyle`
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    line-height: 1.5;
+  }
+
+  .ellipsis-multi {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 1.5;
+  }
+
+  button {
+    border: 0;
+    background-color: initial;
+    cursor: pointer;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  @font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  body {
+    font-family: "Pretendard-Regular";
+    padding: 0 2rem;
+    max-width: 1440px;
+    margin: auto
   }
 `;
 
