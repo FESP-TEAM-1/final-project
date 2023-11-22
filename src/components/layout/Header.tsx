@@ -1,16 +1,15 @@
 import React from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useMatch, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import styles from "styles/layout/Header.module.css";
 
 const Header = () => {
-  const location = useLocation();
   const navigate = useNavigate();
 
   return (
     <header className={styles["header"]}>
-      {location.pathname !== "/" && (
+      {!useMatch("/") && (
         <button
           type="button"
           onClick={() => {
