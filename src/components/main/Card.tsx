@@ -1,5 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useItemStore } from "stores/useItemStore";
 import styles from "styles/main/Card.module.css";
 import { YoutubeItem } from "types/mainItem";
 import getElapsedTime from "utils/getElapsedTime";
@@ -9,25 +10,30 @@ interface CardItemType {
 }
 
 const Card: React.FC<CardItemType> = ({ item }) => {
+  const navigate = useNavigate();
+  const { setItemInfo } = useItemStore();
   const { id } = item;
   const { url: src } = item.snippet.thumbnails.standard;
   const { channelTitle, title, description, publishedAt, channelId } =
     item.snippet;
+
+  const handleClickMove = () => {
+    setItemInfo({ title, channelTitle, description });
+    navigate(`/videos?id=${id}&channelId=${channelId}`);
+  };
   return (
     <>
       <article className={styles["card"]}>
-        <div className={styles["card__cover"]}>
-          <Link to={`/videos/${id}`}>
-            <img src={src} alt="" className={styles["card__cover__img"]} />
-          </Link>
+        <div className={styles["card__cover"]} onClick={handleClickMove}>
+          <img src={src} alt="" className={styles["card__cover__img"]} />
         </div>
-        <Link to={`/channel/${channelId}`}>
-          <p className={styles["card__channel-title"]}>{channelTitle}</p>
+        <Link to={`/channel?${channelId}`} style={{ width: "fit-content" }}>
+          <span className={styles["card__channel-title"]}>{channelTitle}</span>
         </Link>
-        <Link to={`/videos/${id}`}>
-          <h3 className={`${styles["card__title"]} ellipsis-multi`}>{title}</h3>
-        </Link>
-        <p className={`${styles["card__description"]} ellipsis`}>
+        <div onClick={handleClickMove}>
+          <h3 className={`${styles["card__title"]} ellipsis`}>{title}</h3>
+        </div>
+        <p className={`${styles["card__description"]} ellipsis-multi`}>
           {description}
         </p>
         <p className={styles["card__published-at"]}>
