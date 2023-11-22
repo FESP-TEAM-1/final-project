@@ -22,7 +22,10 @@ const Header = () => {
         </button>
       )}
       <h1>
-        <Link to="/">477Tube</Link>
+        <Link to="/" className={styles["header-logo"]}>
+          <img src={"/logo-477tube.svg"} />
+          <span>477Tube</span>
+        </Link>
       </h1>
     </header>
   );

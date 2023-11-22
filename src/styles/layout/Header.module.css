@@ -7,6 +7,18 @@
 }
 
 .header svg {
-  font-size: 3rem;
+  font-size: 2rem;
   margin-right: 1rem;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.header-logo img {
+  width: 4rem;
+  height: 4rem;
 }
