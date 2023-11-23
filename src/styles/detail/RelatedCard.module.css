@@ -34,9 +34,11 @@
 .card__channel-title {
   font-size: 0.875rem;
   color: #686868;
+  color: var(--channel-title);
 }
 .card__channel-title:hover {
   color: black;
+  color: var(--channel-title-hover);
 }
 
 .card__title {
