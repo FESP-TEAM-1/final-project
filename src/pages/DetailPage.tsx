@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Video from "components/detail/Video";
 import RelatedCard from "components/detail/RelatedCard";
+import DetailSkeleton from "components/detail/DetailSkeleton";
 import { ChannelItem } from "types/detailItem";
 import styles from "styles/detail/DetailPage.module.css";
 
@@ -29,7 +30,7 @@ const DetailPage: React.FC = () => {
     queryFn: getChannelData,
   });
 
-  if (isLoading) return <>"Loading..."</>;
+  if (isLoading) return <DetailSkeleton />;
   if (error) return <>{"An error has occurred: " + error.message}</>;
 
   return (

@@ -4,6 +4,7 @@ import styles from "styles/main/MainPage.module.css";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { YoutubeItem } from "types/mainItem";
+import MainSkeleton from "components/main/MainSkeleton";
 
 const MainPage: React.FC = () => {
   const getYoutubeList = async () => {
@@ -20,7 +21,7 @@ const MainPage: React.FC = () => {
     queryFn: getYoutubeList,
   });
 
-  if (isLoading) return <>"Loading..."</>;
+  if (isLoading) return <MainSkeleton />;
 
   if (error) return <>{"An error has occurred: " + error.message}</>;
 
