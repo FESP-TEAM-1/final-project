@@ -4,11 +4,18 @@
   font-size: 3rem;
   font-weight: bold;
   margin-top: 1rem;
+  justify-content: space-between;
+}
+.header-left{
+  display: flex;
+  align-items: center;
 }
 
-.header svg {
-  font-size: 2rem;
+.header :first-child svg{
   margin-right: 1rem;
+}
+.header svg{
+  font-size: 2rem;
 }
 
 .header-logo {
