@@ -41,4 +41,7 @@
   .left-section {
     margin-right: 0;
   }
+  .left-section:first-child {
+    margin-bottom: 50px;
+  }
 }
