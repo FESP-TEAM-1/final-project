@@ -35,10 +35,13 @@ const DetailPage: React.FC = () => {
 
   return (
     <main className={styles["detail-main"]}>
-      <section className={styles["video-section"]}>
-        <Video videoId={videoId} channelId={channelId} />
+      <section className={styles["left-section"]}>
+        <section className={styles["video-section"]}>
+          <Video videoId={videoId} channelId={channelId} />
+        </section>
+        <section>comment section</section>
       </section>
-      <section>
+      <section className={styles["right-section"]}>
         <h2 className={styles["related-title"]}>관련된 영상</h2>
         <ul className={styles["related-videos"]}>
           {channelData.items.map((item: ChannelItem) => {
