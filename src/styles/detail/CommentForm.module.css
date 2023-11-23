@@ -1,0 +1,50 @@
+.comment-form {
+  /* 임시 */
+  margin-bottom: 3.125rem;
+}
+.comment-form__textarea {
+  box-sizing: border-box;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #eee;
+  resize: none;
+  outline: none;
+  font-family: inherit;
+  font-size: 1.4rem;
+  overflow: hidden;
+  /* padding: 0 1rem; */
+}
+.comment-form__textarea:focus {
+  border-bottom: 2px solid #000;
+}
+
+.comment-form__buttons {
+  margin-top: 0.625rem;
+  display: flex;
+  gap: 0.5rem;
+}
+.comment-form__buttons > * {
+  padding: 0.5rem 1rem;
+  border: 1px solid #eee;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+.comment-form__buttons__reset {
+  margin-left: auto;
+  border: none;
+  background-color: inherit;
+  cursor: pointer;
+}
+.comment-form__buttons__submit {
+  background-color: #027fdb;
+  color: white;
+  cursor: pointer;
+}
+.comment-form__buttons__reset:hover,
+.comment-form__buttons__submit:disabled {
+  background-color: #eee;
+  color: black;
+}
+.comment-form__buttons__reset:disabled {
+  cursor: initial;
+}
