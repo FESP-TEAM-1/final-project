@@ -10,7 +10,7 @@
   align-items: center;
 }
 
-.header-left, 
+.header-left,
 .header-right {
   display: flex;
   align-items: center;
@@ -30,7 +30,7 @@
   margin-left: auto;
 }
 
-.search__button svg{
+.search__button svg {
   color: var(--icon-color);
 }
 
@@ -49,7 +49,7 @@
 }
 
 @media screen and (max-width: 768px) {
-  .header-center.search-bar{
+  .header-center.search-bar {
     display: none;
   }
   .header-right .search__button {
@@ -95,6 +95,7 @@
   font-weight: 400;
   font-size: 1rem;
   background-color: inherit;
+  color: inherit;
 }
 
 .header-center .search__button,
