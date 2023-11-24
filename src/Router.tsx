@@ -2,7 +2,7 @@ import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 import MainPage from "pages/MainPage";
 import DetailPage from "pages/DetailPage";
-import SearchPage from 'pages/SearchPage'
+import SearchPage from "pages/SearchPage";
 import ErrorPage from "pages/ErrorPage";
 import Root from "Root";
 
