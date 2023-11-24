@@ -1,5 +1,6 @@
 .video-container {
   /* width: 90%; */
+  min-width: 700px;
   display: flex;
   flex-direction: column;
   margin: auto;
@@ -11,7 +12,7 @@
 }
 
 .video-cover {
-  width: 80%;
+  width: 100%;
   border-radius: 0.5rem;
   overflow: hidden;
   margin: auto;

@@ -26,8 +26,8 @@ const DetailSkeleton = () => {
       </section>
       <section>
         <ul className={detailStyles["related-videos"]}>
-          {Array.from({ length: 6 }, () => (
-            <article className={relatedCardStyles["card"]}>
+          {Array.from({ length: 6 }, (_, index) => (
+            <article key={index} className={relatedCardStyles["card"]}>
               <div className={relatedCardStyles["card__cover"]}>
                 <Skeleton height={"100%"} />
                 <Skeleton height={"100%"} />

@@ -31,19 +31,21 @@ const RelatedCard: React.FC<RelatedCardType> = ({ item }) => {
         <div className={styles["card__cover"]} onClick={handleClickMove}>
           <img src={src} alt="" className={styles["card__cover__img"]} />
         </div>
-        <div onClick={handleClickMove}>
-          <h3 className={`${styles["card__title"]} ellipsis`}>
-            {decodeHTMLEntities(title)}
-          </h3>
+        <div>
+          <div onClick={handleClickMove}>
+            <h3 className={`${styles["card__title"]} ellipsis-multi`}>
+              {decodeHTMLEntities(title)}
+            </h3>
+          </div>
+          <Link to={`/channel?${channelId}`} style={{ width: "fit-content" }}>
+            <span className={styles["card__channel-title"]}>
+              {decodeHTMLEntities(channelTitle)}
+            </span>
+          </Link>
+          <p className={styles["card__published-at"]}>
+            {getElapsedTime(publishedAt)}
+          </p>
         </div>
-        <Link to={`/channel?${channelId}`} style={{ width: "fit-content" }}>
-          <span className={styles["card__channel-title"]}>
-            {decodeHTMLEntities(channelTitle)}
-          </span>
-        </Link>
-        <p className={styles["card__published-at"]}>
-          {getElapsedTime(publishedAt)}
-        </p>
       </article>
     </>
   );

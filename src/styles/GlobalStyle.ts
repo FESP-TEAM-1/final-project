@@ -53,7 +53,6 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: "Pretendard-Regular";
     padding: 0 2rem;
-    max-width: 1440px;
     margin: auto
   }
 `;
