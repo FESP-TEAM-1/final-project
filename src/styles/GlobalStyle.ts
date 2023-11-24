@@ -29,6 +29,11 @@ const GlobalStyle = createGlobalStyle`
     line-height: 1.5;
   }
 
+  .dim {
+    position: fixed;
+    inset: 0;
+  }
+
   button {
     border: 0;
     margin: 0;
@@ -57,8 +62,11 @@ const GlobalStyle = createGlobalStyle`
   }
 
   :root {
+    --gray: #f8f8f8;
     --dark-gray: #686868;
     --light-gray: #ccc;
+    --color-black: #000;
+    --color-white: #fff;
   }
 
   body[data-theme="light"] {
@@ -68,6 +76,10 @@ const GlobalStyle = createGlobalStyle`
     --channel-title: var(--dark-gray);
     --des-bg-color: #eee;
     --des-bg-color-hover: #ddd;
+    --hover-color: #ddd;
+    --icon-color: var(--color-black);
+    --border-color: var(--dark-gray);
+    --button-color: var(--gray);
   }
   body[data-theme="dark"] {
     background-color: rgb(15,15,15);
@@ -76,6 +88,10 @@ const GlobalStyle = createGlobalStyle`
     --channel-title: var(--light-gray);
     --des-bg-color: #272727;
     --des-bg-color-hover: #3f3f3f;
+    --hover-color: #3f3f3f;
+    --icon-color: var(--color-white);
+    --border-color: var(--light-gray);
+    --button-color: #272727;
   }
 `;
 
