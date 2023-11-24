@@ -57,7 +57,7 @@ const Comment: React.FC<CommmetPropsType> = ({
             </button>
           </div>
           <div
-            className={styles["dim"]}
+            className='dim'
             onClick={() => setActiveCommentId(null)}
           ></div>
         </>
