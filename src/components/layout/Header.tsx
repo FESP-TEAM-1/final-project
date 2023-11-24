@@ -14,12 +14,13 @@ const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [isViewSearchBar, setIsViewSearchBar] = useState(false);
-
+  const [input, setInput] = useState("");
   const { darkMode, setDarkMode } = useThemeStore();
 
   const handleSubmitSearch = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("search 검색 결과 창으로 이동");
+    if (input.trim() !== "") navigate(`/search?title=${input}`);
   };
 
   const hanldeViewSearchBar = () => {
@@ -65,6 +66,7 @@ const Header = () => {
               type="text"
               className={styles["search__input"]}
               placeholder="제목으로 검색"
+              onChange={(e) => setInput(e.target.value)}
             />
             <button type="submit" className={styles["search__button"]}>
               <FontAwesomeIcon icon={faMagnifyingGlass} />
@@ -111,6 +113,7 @@ const Header = () => {
                 type="text"
                 className={styles["search__input"]}
                 placeholder="제목으로 검색"
+                onChange={(e) => setInput(e.target.value)}
               />
               <button type="submit" className={styles["search__button"]}>
                 <FontAwesomeIcon icon={faMagnifyingGlass} />
