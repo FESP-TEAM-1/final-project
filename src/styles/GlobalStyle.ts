@@ -55,6 +55,28 @@ const GlobalStyle = createGlobalStyle`
     padding: 0 2rem;
     margin: auto
   }
+
+  :root {
+    --dark-gray: #686868;
+    --light-gray: #ccc;
+  }
+
+  body[data-theme="light"] {
+    background-color: #fff;
+    color: #000;
+    --channel-title-hover: #000;
+    --channel-title: var(--dark-gray);
+    --des-bg-color: #eee;
+    --des-bg-color-hover: #ddd;
+  }
+  body[data-theme="dark"] {
+    background-color: rgb(15,15,15);
+    color: #fff;
+    --channel-title-hover: #fff;
+    --channel-title: var(--light-gray);
+    --des-bg-color: #272727;
+    --des-bg-color-hover: #3f3f3f;
+  }
 `;
 
 export default GlobalStyle;

@@ -1,11 +1,15 @@
 import React from "react";
-import Skeleton from "react-loading-skeleton";
+import Skeleton,{SkeletonTheme} from "react-loading-skeleton";
+import { useThemeStore } from "stores/useThemeStore";
 import "react-loading-skeleton/dist/skeleton.css";
 import cardStyles from "styles/main/Card.module.css";
 import mainStyles from "styles/main/MainPage.module.css";
 
 const MainSkeleton = () => {
+  const { darkMode } = useThemeStore();
+
   return (
+    <SkeletonTheme baseColor={darkMode?"#3f3f3f":"#ebebeb"} highlightColor={darkMode?"#464646":"#f5f5f5"}>
     <div className={mainStyles.main}>
       {Array.from({ length: 12 }, (_, index) => (
         <div key={index} className={cardStyles["card"]}>
@@ -27,6 +31,7 @@ const MainSkeleton = () => {
         </div>
       ))}
     </div>
+    </SkeletonTheme>
   );
 };
 

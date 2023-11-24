@@ -31,15 +31,15 @@
 
 .video-channel-title {
   font-size: 1.125rem;
-  color: #686868;
+  color: var(--channel-title);
 }
 
 .video-channel-title:hover {
-  color: black;
+  color: var(--channel-title-hover);
 }
 
 .video-description {
-  background-color: #eee;
+  background-color: var(--des-bg-color);
   border-radius: 0.5rem;
   padding: 1rem;
 }
@@ -48,7 +48,7 @@
 }
 .video-description.pointer:hover {
   cursor: pointer;
-  background-color: #ddd;
+  background-color: var(--des-bg-color-hover);
 }
 
 .video-description__content {
@@ -58,4 +58,5 @@
 
 .video-description button {
   margin-top: 0.625rem;
+  color: inherit;
 }
