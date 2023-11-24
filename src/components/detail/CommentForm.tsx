@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from "react";
-import { handleClickInsertType } from "types/commentItem";
 import styles from "styles/detail/CommentForm.module.css";
 
 function useHandleResizeHeight(inputValue: string) {
@@ -22,13 +21,10 @@ function useHandleResizeHeight(inputValue: string) {
 
 interface CommentFormPropsType {
   videoId: string;
-  handleClickInsert: handleClickInsertType;
+  onSubmit: (videoId: string, commentInputValue: string) => Promise<void>;
 }
 
-const CommentForm: React.FC<CommentFormPropsType> = ({
-  videoId,
-  handleClickInsert,
-}) => {
+const CommentForm: React.FC<CommentFormPropsType> = ({ videoId, onSubmit }) => {
   const [inputValue, setInputValue] = useState("");
   const [isBtnView, setIsBtnView] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
@@ -50,7 +46,7 @@ const CommentForm: React.FC<CommentFormPropsType> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    handleClickInsert(videoId, inputValue);
+    onSubmit(videoId, inputValue);
     handleReset();
   };
 
