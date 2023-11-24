@@ -7,8 +7,8 @@ import mainStyles from "styles/main/MainPage.module.css";
 const MainSkeleton = () => {
   return (
     <div className={mainStyles.main}>
-      {Array.from({ length: 12 }, () => (
-        <div className={cardStyles["card"]}>
+      {Array.from({ length: 12 }, (_, index) => (
+        <div key={index} className={cardStyles["card"]}>
           <div className={cardStyles["card__cover"]}>
             <Skeleton height={"100%"} />
           </div>
