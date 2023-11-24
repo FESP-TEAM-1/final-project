@@ -1,23 +1,72 @@
+/* layout */
 .header {
-  display: flex;
-  align-items: center;
   font-size: 3rem;
   font-weight: bold;
-  margin-top: 1rem;
-  justify-content: space-between;
-}
-.header-left{
+  margin: 1rem 0 1.5625rem;
+  position: relative;
+
+  gap: 1rem;
   display: flex;
   align-items: center;
 }
 
-.header :first-child svg{
-  margin-right: 1rem;
+.header-left, 
+.header-right {
+  display: flex;
+  align-items: center;
+  max-width: 33%;
+  flex-grow: 1;
 }
-.header svg{
+
+.header-center.search-bar {
+  display: flex;
+  min-width: 300px;
+  max-width: 34%;
+  flex-grow: 3;
+}
+
+.header-right {
+  justify-content: flex-end;
+  margin-left: auto;
+}
+
+.search__button svg{
+  color: var(--icon-color);
+}
+
+.header-right .search__button {
+  display: none;
+}
+
+.theme-button {
+  margin-left: 1rem;
+}
+
+.header-right .search__button:hover,
+.theme-button:hover {
+  background-color: var(--hover-color);
+  border-radius: 50%;
+}
+
+@media screen and (max-width: 768px) {
+  .header-center.search-bar{
+    display: none;
+  }
+  .header-right .search__button {
+    display: block;
+  }
+}
+
+.header button {
+  width: 42px;
+  height: 42px;
+}
+
+.header svg {
   font-size: 2rem;
 }
 
+/* header left */
 .header-logo {
   display: flex;
   align-items: center;
@@ -28,4 +77,51 @@
 .header-logo img {
   width: 4rem;
   height: 4rem;
+}
+
+/* header center (search bar) */
+.search-bar {
+  border: 1px solid var(--dark-gray);
+  border-radius: 2rem;
+  overflow: hidden;
+}
+
+.search__input {
+  width: 100%;
+  padding: 0.625rem 1.5rem;
+  outline: none;
+  border: none;
+  font-style: inherit;
+  font-weight: 400;
+  font-size: 1rem;
+  background-color: inherit;
+}
+
+.header-center .search__button,
+.header-full .search__button {
+  width: 64px;
+  flex-shrink: 0;
+  border-left: 1px solid var(--dark-gray);
+  background-color: var(--button-color);
+}
+
+.search__button svg {
+  width: 1.5rem;
+}
+
+/* header full (seaerch bar) */
+.narrow {
+  background-color: inherit;
+  height: 64px;
+}
+
+.header-full.search-bar {
+  display: flex;
+  width: 80%;
+  max-width: 800px;
+  z-index: 10;
+}
+
+.back-button {
+  margin-right: 0.5rem;
 }
