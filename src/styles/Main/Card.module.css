@@ -1,16 +1,79 @@
+@keyframes cardHoverAnimation {
+  0% {
+    transform: scale(1);
+    z-index: 1; /* 초기 z-index */
+  }
+  50% {
+    transform: scale(1.25);
+    z-index: 10; /* 50% 지점에서 z-index 변경 */
+  }
+  100% {
+    transform: scale(1.5);
+    z-index: 10; /* 최종 z-index 유지 */
+  }
+}
+
+@keyframes cardAnimation {
+  0% {
+    transform: scale(1.5);
+    z-index: 10; /* 초기 z-index */
+  }
+  50% {
+    transform: scale(1.25);
+    z-index: 1; /* 50% 지점에서 z-index 변경 */
+  }
+  100% {
+    transform: scale(1);
+    z-index: 1; /* 최종 z-index 유지 */
+  }
+}
+
+/* card 호버 css */
+.card-hover {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.625rem;
+  border-radius: 0.5rem;
+  /* animation: cardHoverAnimation 0.3s ease-in-out; */
+  transition: transform 0.3s ease-in-out;
+  transform: scale(1.5);
+  z-index: 10;
+}
+.card-hover .card__cover {
+  margin-bottom: 0;
+  aspect-ratio: 0;
+  height: 100%;
+}
+.card-hover .card__description {
+  display: none;
+}
+.card-hover iframe {
+  height: 100%;
+  width: 100%;
+}
+.card-left {
+  transform-origin: left;
+}
+.card-right {
+  transform-origin: right;
+}
+
+/* 기본 card css */
 .card {
   display: flex;
   flex-direction: column;
   align-items: start;
   gap: 0.3125rem;
+  padding: 0.625rem;
+  /* animation: cardAnimation 0.3s ease-in-out; */
+  transition: transform 0.3s ease-in-out;
+  transform: scale(1);
 }
+
 .card * {
   width: 100%;
 }
-
-/* .card:hover {
-  background-color: #686868;
-} */
 
 .card__cover {
   position: relative;
