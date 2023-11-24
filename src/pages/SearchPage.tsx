@@ -5,6 +5,7 @@ import SearchCard from "components/search/SearchCard";
 import { YoutubeItem } from "types/mainItem";
 import styles from "styles/search/SearchPage.module.css";
 import { useSearchParams } from "react-router-dom";
+import SearchSkeleton from "components/search/SearchSkeleton";
 
 const getYoutubeList = async (title: string) => {
   const { data } = await axios.get("/videos/popular.json");
@@ -32,7 +33,7 @@ const SearchPage = () => {
     refetch();
   }, [searchParams]);
 
-  if (isFetching) return <>Loading...</>;
+  if (isFetching) return <SearchSkeleton />;
   if (error) return <>{"An error has occurred: " + error.message}</>;
   if (!youtubeData.length) return <>검색 결과가 없습니다!</>;
 
