@@ -57,9 +57,3 @@
 .comment__button-list button:first-child {
   border-bottom: 1px solid #fff;
 }
-
-/* dim */
-.dim {
-  position: fixed;
-  inset: 0;
-}

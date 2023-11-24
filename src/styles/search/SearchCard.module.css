@@ -1,0 +1,59 @@
+.card {
+  display: flex;
+  align-items: start;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.card__cover {
+  flex: 1;
+  min-width: 150px;
+  position: relative;
+  aspect-ratio: 16/9;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.card__cover__img {
+  width: 100%;
+  object-fit: contain;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.card > :last-child {
+  flex: 2;
+  min-width: 150px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.card__channel-title {
+  display: block;
+  font-size: 1rem;
+  color: #686868;
+  color: var(--channel-title);
+}
+.card__channel-title:hover {
+  color: black;
+  color: var(--channel-title-hover);
+}
+
+.card__title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.card__description {
+  font-size: 1rem;
+}
+
+.card__published-at {
+  font-size: 1rem;
+  color: #686868;
+}
