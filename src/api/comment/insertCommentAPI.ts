@@ -1,12 +1,8 @@
-import { Dispatch, SetStateAction } from "react";
 import { COMMENT_TABLE, supabase } from "supabase/videoComment";
-import { AllCommentType } from "types/commentItem";
 
 export const insertCommentAPI = async (
   videoId: string,
-  commentInput: string,
-  comments: AllCommentType[],
-  setComments: Dispatch<SetStateAction<AllCommentType[]>>
+  commentInput: string
 ) => {
   try {
     const { data, error } = await supabase
@@ -18,9 +14,10 @@ export const insertCommentAPI = async (
       throw error;
     }
 
-    setComments([data[0], ...comments])!;
+    return data[0];
   } catch (error) {
     console.error("Error fetching data:", error);
     // 적절한 오류 처리
+    return Promise.reject();
   }
 };
