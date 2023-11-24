@@ -40,6 +40,9 @@ const SearchCard: React.FC<PropsType> = ({ item }) => {
             {decodeHTMLEntities(channelTitle)}
           </span>
         </Link>
+        <p className={`${styles["card__description"]} ellipsis-multi`}>
+          {description}
+        </p>
         <p className={styles["card__published-at"]}>
           {getElapsedTime(publishedAt)}
         </p>
