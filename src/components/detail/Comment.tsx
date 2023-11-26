@@ -28,7 +28,7 @@ const Comment: React.FC<CommmetPropsType> = ({
 
   return (
     <div className={styles["comment"]}>
-      <div>
+      <div className={styles["comment__container"]}>
         <strong className={styles["comment__user"]}>
           @user-{item.anonymous_user_id.split("-").at(-1)}
         </strong>
@@ -56,10 +56,7 @@ const Comment: React.FC<CommmetPropsType> = ({
               삭제
             </button>
           </div>
-          <div
-            className='dim'
-            onClick={() => setActiveCommentId(null)}
-          ></div>
+          <div className="dim" onClick={() => setActiveCommentId(null)}></div>
         </>
       )}
     </div>
