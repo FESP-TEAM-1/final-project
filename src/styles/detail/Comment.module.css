@@ -9,6 +9,10 @@
   display: block;
 }
 
+.comment__container {
+  margin-right: 4.375rem;
+}
+
 .comment__user {
   font-weight: bold;
   font-size: 1.3rem;
@@ -28,8 +32,12 @@
   display: none;
   width: 2.5rem;
   height: 2.5rem;
-  cursor: pointer;
+  position: absolute;
+  top: 10%;
+  right: 0;
   font-size: 1.125rem;
+  color: var(--el-text-color);
+  cursor: pointer;
 }
 
 .comment__ellipsis.active {
