@@ -80,6 +80,8 @@ const GlobalStyle = createGlobalStyle`
     --icon-color: var(--color-black);
     --border-color: var(--dark-gray);
     --button-color: var(--gray);
+    --textarea-bg-color: #fff;
+    --el-text-color: var(--color-black);
   }
   body[data-theme="dark"] {
     background-color: rgb(15,15,15);
@@ -92,6 +94,8 @@ const GlobalStyle = createGlobalStyle`
     --icon-color: var(--color-white);
     --border-color: var(--light-gray);
     --button-color: #272727;
+    --textarea-bg-color: rgb(15,15,15);
+    --el-text-color: var(--color-white);
   }
 `;
 
