@@ -48,7 +48,7 @@
 .card-hover .card__description {
   display: none;
 }
-.card-hover iframe {
+.card__cover_iframe {
   height: 100%;
   width: 100%;
 }

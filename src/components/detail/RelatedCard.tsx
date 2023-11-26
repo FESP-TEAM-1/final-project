@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import getElapsedTime from "utils/getElapsedTime";
 import { useItemStore } from "stores/useItemStore";
@@ -13,6 +13,8 @@ interface RelatedCardType {
 const RelatedCard: React.FC<RelatedCardType> = ({ item }) => {
   const navigate = useNavigate();
   const { setItemInfo } = useItemStore();
+  const [isHover, setIsHover] = useState(false);
+  const [hoverTimeout, setHoverTimeout] = useState<number | null>(null);
   const { url: src } = item.snippet.thumbnails.high;
   const {
     id: { videoId },
@@ -25,11 +27,34 @@ const RelatedCard: React.FC<RelatedCardType> = ({ item }) => {
     navigate(`/videos?id=${videoId}&channelId=${channelId}`);
   };
 
+  const handleHover = (event: string) => {
+    if (event === "enter") {
+      const timeoutId = window.setTimeout(() => {
+        setIsHover(true);
+      }, 500);
+      setHoverTimeout(timeoutId);
+    } else {
+      // 마우스가 엘리먼트를 떠나는 경우
+      if (hoverTimeout) clearTimeout(hoverTimeout);
+      setIsHover(false);
+    }
+  };
+
   return (
     <>
-      <article className={styles["card"]}>
+      <article
+        className={styles["card"]}
+        onMouseEnter={() => handleHover("enter")}
+        onMouseLeave={() => handleHover("leave")}
+      >
         <div className={styles["card__cover"]} onClick={handleClickMove}>
-          <img src={src} alt="" className={styles["card__cover__img"]} />
+          {isHover ? (
+            <iframe
+              src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0&rel=0`}
+            ></iframe>
+          ) : (
+            <img src={src} alt="" className={styles["card__cover__img"]} />
+          )}
         </div>
         <div>
           <div onClick={handleClickMove}>
