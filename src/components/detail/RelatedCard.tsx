@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import getElapsedTime from "utils/getElapsedTime";
-import { useItemStore } from "stores/useItemStore";
 import { ChannelItem } from "types/detailItem";
 import styles from "styles/detail/RelatedCard.module.css";
 import decodeHTMLEntities from "utils/setDecodeHTMLEntities";
@@ -12,7 +11,6 @@ interface RelatedCardType {
 
 const RelatedCard: React.FC<RelatedCardType> = ({ item }) => {
   const navigate = useNavigate();
-  const { setItemInfo } = useItemStore();
   const [isHover, setIsHover] = useState(false);
   const [hoverTimeout, setHoverTimeout] = useState<number | null>(null);
   const { url: src } = item.snippet.thumbnails.high;
@@ -23,7 +21,6 @@ const RelatedCard: React.FC<RelatedCardType> = ({ item }) => {
     item.snippet;
 
   const handleClickMove = () => {
-    setItemInfo({ title, channelTitle, description });
     navigate(`/videos?id=${videoId}&channelId=${channelId}`);
   };
 
