@@ -1,20 +1,11 @@
 import React, { useEffect } from "react";
-import axios from "axios";
+import { useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import SearchCard from "components/search/SearchCard";
-import { YoutubeItem } from "types/mainItem";
-import styles from "styles/search/SearchPage.module.css";
-import { useSearchParams } from "react-router-dom";
 import SearchSkeleton from "components/search/SearchSkeleton";
-
-const getYoutubeList = async (title: string) => {
-  const { data } = await axios.get("/videos/popular.json");
-  const titleToLowerCase = title.toLowerCase();
-  const filteredItems = data.items.filter((i: YoutubeItem) =>
-    i.snippet.title.toLowerCase().includes(titleToLowerCase)
-  );
-  return filteredItems;
-};
+import { YoutubeItem } from "types/mainItem";
+import { getSearchVideoListAPI } from "api/search";
+import styles from "styles/search/SearchPage.module.css";
 
 const SearchPage = () => {
   const [searchParams] = useSearchParams();
@@ -26,7 +17,7 @@ const SearchPage = () => {
     refetch,
   } = useQuery({
     queryKey: ["youtubeSearch"],
-    queryFn: () => getYoutubeList(searchParams.get("title")!),
+    queryFn: () => getSearchVideoListAPI(searchParams.get("title")!),
   });
 
   useEffect(() => {
