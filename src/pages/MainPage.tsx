@@ -1,28 +1,22 @@
 import React from "react";
-import Card from "components/main/Card";
-import styles from "styles/main/MainPage.module.css";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import { YoutubeItem } from "types/mainItem";
+import Card from "components/main/Card";
 import MainSkeleton from "components/main/MainSkeleton";
+import { getVideoListAPI } from "api/main";
+import { YoutubeItem } from "types/mainItem";
+import styles from "styles/main/MainPage.module.css";
 
 const MainPage: React.FC = () => {
-  const getYoutubeList = async () => {
-    const { data } = await axios.get("/videos/popular.json");
-    return data;
-  };
-
   const {
     isLoading,
     error,
     data: youtubeData,
   } = useQuery({
     queryKey: ["youtubeData"],
-    queryFn: getYoutubeList,
+    queryFn: getVideoListAPI,
   });
 
   if (isLoading) return <MainSkeleton />;
-
   if (error) return <>{"An error has occurred: " + error.message}</>;
 
   return (

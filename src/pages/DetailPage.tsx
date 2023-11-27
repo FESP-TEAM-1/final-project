@@ -10,38 +10,18 @@ import DetailSkeleton from "components/detail/DetailSkeleton";
 import { ChannelData } from "types/detailItem";
 import styles from "styles/detail/DetailPage.module.css";
 
-const getChannelData = async (channelId: string) => {
-  const { data } = await axios<ChannelData>(
-    `/videos/searchByChannels/search-by-channel-id-${channelId}.json`
-  );
-  return data;
-};
-
 const DetailPage: React.FC = () => {
   const [searchParams] = useSearchParams();
   const videoId = searchParams.get("id")!;
-  const channelId = searchParams.get("channelId")!;
-
-  const {
-    isLoading,
-    error,
-    data: channelData,
-  } = useQuery({
-    queryKey: ["channelData"],
-    queryFn: () => getChannelData(channelId),
-  });
-
-  if (isLoading) return <DetailSkeleton />;
-  if (error) return <>{"An error has occurred: " + error.message}</>;
 
   return (
     <main className={styles["detail-main"]}>
       <section className={styles["left-section"]}>
-        <VideoSection videoId={videoId} channelId={channelId} />
+        <VideoSection />
         <CommentSection videoId={videoId} />
       </section>
       <section className={styles["right-section"]}>
-        <RelatedSection channelData={channelData!} videoId={videoId} />
+        <RelatedSection />
       </section>
     </main>
   );

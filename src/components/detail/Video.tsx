@@ -1,17 +1,27 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { useItemStore } from "stores/useItemStore";
-import styles from "styles/detail/Video.module.css";
+import { Link, useSearchParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 import decodeHTMLEntities from "utils/setDecodeHTMLEntities";
+import styles from "styles/detail/Video.module.css";
+import { getVideoAPI } from "api/detail";
 
-interface VideoPropsType {
-  videoId: string;
-  channelId: string;
-}
-
-const Video: React.FC<VideoPropsType> = ({ videoId, channelId }) => {
+const Video: React.FC = () => {
+  const [searchParams] = useSearchParams();
+  const videoId = searchParams.get("id")!;
+  const channelId = searchParams.get("channelId")!;
   const [isOpen, setIsOpen] = useState(false);
-  const { itemInfo } = useItemStore();
+
+  const {
+    isLoading,
+    error,
+    data: videoData,
+  } = useQuery({
+    queryKey: ["videoData", videoId],
+    queryFn: () => getVideoAPI(videoId, channelId),
+  });
+
+  if (isLoading) return <div>loading ...</div>;
+  if (error) return <div>{error.message}</div>;
 
   return (
     <div className={styles["video-container"]}>
@@ -23,11 +33,11 @@ const Video: React.FC<VideoPropsType> = ({ videoId, channelId }) => {
         ></iframe>
       </div>
       <h3 className={styles["video-title"]}>
-        {decodeHTMLEntities(itemInfo.title)}
+        {decodeHTMLEntities(videoData.title)}
       </h3>
-      <Link to={`/channel/${channelId}`}>
+      <Link to={`/channel/${videoData.snippet.channelId}`}>
         <p className={styles["video-channel-title"]}>
-          {decodeHTMLEntities(itemInfo.channelTitle)}
+          {decodeHTMLEntities(videoData.snippet.channelTitle)}
         </p>
       </Link>
       <div
@@ -43,7 +53,7 @@ const Video: React.FC<VideoPropsType> = ({ videoId, channelId }) => {
             !isOpen && "ellipsis-multi"
           }`}
         >
-          {decodeHTMLEntities(itemInfo.description)}
+          {decodeHTMLEntities(videoData.snippet.description)}
         </p>
         <button type="button" onClick={() => setIsOpen(!isOpen)}>
           {!isOpen ? "더보기" : "간략히"}
