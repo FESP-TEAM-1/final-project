@@ -1,4 +1,3 @@
-import React from "react";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { useThemeStore } from "stores/useThemeStore";
@@ -17,7 +16,7 @@ const DetailSkeleton = () => {
       <main className={detailStyles["detail-main"]}>
         <section className={detailStyles["left-section"]}>
           {/* 영상 보기 */}
-          <section className={detailStyles["video-section"]}>
+          <section>
             <article className={videolStyles["video-container"]}>
               <div className={videolStyles["video-cover"]}>
                 <Skeleton height={"100%"} style={{ aspectRatio: "16/9" }} />
@@ -63,7 +62,7 @@ const DetailSkeleton = () => {
         <section className={detailStyles["right-section"]}>
           {/* 관련 영상 리스트 */}
           <section>
-            <ul className={detailStyles["related-videos"]}>
+            <ul>
               {Array.from({ length: 6 }, (_, index) => (
                 <article key={index} className={relatedCardStyles["card"]}>
                   <div className={relatedCardStyles["card__cover"]}>

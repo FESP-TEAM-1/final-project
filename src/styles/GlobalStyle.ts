@@ -58,7 +58,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: "Pretendard-Regular";
     padding: 0 2rem;
-    margin: auto
+    margin: auto;
   }
 
   :root {
@@ -82,6 +82,9 @@ const GlobalStyle = createGlobalStyle`
     --button-color: var(--gray);
     --textarea-bg-color: #fff;
     --el-text-color: var(--color-black);
+    --scroll-bg-color: #fff;
+    --scroll-color: #a0a0a5;
+    --scroll-hover-color: #babac0;
   }
   body[data-theme="dark"] {
     background-color: rgb(15,15,15);
@@ -96,6 +99,29 @@ const GlobalStyle = createGlobalStyle`
     --button-color: #272727;
     --textarea-bg-color: rgb(15,15,15);
     --el-text-color: var(--color-white);
+    --scroll-bg-color: rgb(15,15,15);
+    --scroll-color: #babac0;
+    --scroll-hover-color: #a0a0a5;
+  }
+
+  body::-webkit-scrollbar {
+    background-color: inherit;
+    width: 1rem;
+  }
+  body::-webkit-scrollbar-track {
+    background-color: inherit;
+  }
+  body::-webkit-scrollbar-track:hover {
+    background-color: inherit
+  }
+
+  body::-webkit-scrollbar-thumb {
+    background-color: var(--scroll-color);
+    border-radius: 1rem;
+    border: 4px solid var(--scroll-bg-color);
+  }
+  body::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scroll-hover-color);
   }
 `;
 
