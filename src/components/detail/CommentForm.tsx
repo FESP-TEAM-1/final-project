@@ -23,7 +23,7 @@ const CommentForm: React.FC<CommentFormPropsType> = ({ videoId }) => {
   const { mutate } = useMutation({
     mutationFn: (data: paramsType) => insertCommentAPI(data),
     onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: ["commentData"] }),
+      queryClient.invalidateQueries({ queryKey: ["commentData", videoId] }),
   });
 
   useEffect(() => {

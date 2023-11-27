@@ -6,23 +6,26 @@ import { deleteCommentAPI } from "api/comment";
 import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "styles/detail/Comment.module.css";
+import decodeHTMLEntities from "utils/setDecodeHTMLEntities";
 
 interface CommmetPropsType {
   item: CommentType;
   activeCommentId: number | null;
   setActiveCommentId: React.Dispatch<React.SetStateAction<number | null>>;
+  videoId: string;
 }
 
 const Comment: React.FC<CommmetPropsType> = ({
   item,
   activeCommentId,
   setActiveCommentId,
+  videoId,
 }) => {
   const queryClient = useQueryClient();
   const { mutate } = useMutation({
     mutationFn: (id: number) => deleteCommentAPI(id),
     onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: ["commentData"] }),
+      queryClient.invalidateQueries({ queryKey: ["commentData", videoId] }),
   });
 
   return (
@@ -34,7 +37,9 @@ const Comment: React.FC<CommmetPropsType> = ({
         <span className={styles["comment__created-at"]}>
           {getElapsedTime(item.created_at)}
         </span>
-        <p className={styles["comment__text"]}>{item.text}</p>
+        <p className={styles["comment__text"]}>
+          {decodeHTMLEntities(item.text as string)}
+        </p>
       </div>
 
       <button

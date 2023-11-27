@@ -17,7 +17,7 @@ const CommentSection: React.FC<PropsType> = ({ videoId }) => {
     error,
     data: commentData,
   } = useQuery({
-    queryKey: ["commentData"],
+    queryKey: ["commentData", videoId],
     queryFn: () => getCommentAPI(videoId),
   });
 
@@ -36,6 +36,7 @@ const CommentSection: React.FC<PropsType> = ({ videoId }) => {
                 item={comment}
                 activeCommentId={activeCommentId}
                 setActiveCommentId={setActiveCommentId}
+                videoId={videoId}
               />
             </li>
           ))}
