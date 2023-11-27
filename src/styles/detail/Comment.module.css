@@ -15,7 +15,7 @@
 
 .comment__user {
   font-weight: bold;
-  font-size: 1.3rem;
+  font-size: 1rem;
   display: inline-block;
   margin-right: 0.3125rem;
 }
@@ -27,6 +27,9 @@
 .comment__text {
   margin-top: 0.625rem;
   font-size: 1.4rem;
+  max-width: fit-content;
+  word-break: break-all;
+  white-space: pre-line;
 }
 .comment__ellipsis {
   display: none;
@@ -64,4 +67,10 @@
 }
 .comment__button-list button:first-child {
   border-bottom: 1px solid #fff;
+}
+
+@media (max-width: 1050px) {
+  .comment__button-list {
+    right: 0;
+  }
 }
