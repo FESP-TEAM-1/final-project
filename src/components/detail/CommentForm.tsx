@@ -1,34 +1,30 @@
 import React, { useState, useRef, useEffect } from "react";
 import styles from "styles/detail/CommentForm.module.css";
-
-function useHandleResizeHeight(inputValue: string) {
-  const ref = useRef<HTMLTextAreaElement>(null);
-  const handleResizeHeight = () => {
-    if (ref.current) {
-      ref.current.style.height = "auto";
-      ref.current.style.height = ref.current.scrollHeight + "px";
-    }
-  };
-
-  useEffect(() => {
-    if (inputValue) {
-      handleResizeHeight();
-    }
-  }, [inputValue]);
-
-  return { ref, handleResizeHeight };
-}
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { insertCommentAPI } from "api/comment";
+import useHandleResizeHeight from "hooks/useHandleResizeHeight";
 
 interface CommentFormPropsType {
   videoId: string;
-  onSubmit: (videoId: string, commentInputValue: string) => Promise<void>;
 }
 
-const CommentForm: React.FC<CommentFormPropsType> = ({ videoId, onSubmit }) => {
+interface paramsType {
+  videoId: string;
+  commentInput: string;
+}
+
+const CommentForm: React.FC<CommentFormPropsType> = ({ videoId }) => {
   const [inputValue, setInputValue] = useState("");
   const [isBtnView, setIsBtnView] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
   const { ref, handleResizeHeight } = useHandleResizeHeight(inputValue);
+  const queryClient = useQueryClient();
+
+  const { mutate } = useMutation({
+    mutationFn: (data: paramsType) => insertCommentAPI(data),
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: ["commentData"] }),
+  });
 
   useEffect(() => {
     if (inputValue) setIsDisabled(false);
@@ -39,6 +35,7 @@ const CommentForm: React.FC<CommentFormPropsType> = ({ videoId, onSubmit }) => {
     setInputValue("");
     setIsBtnView(false);
   };
+
   const handleChangeTextarea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInputValue(e.target.value);
     handleResizeHeight();
@@ -46,7 +43,7 @@ const CommentForm: React.FC<CommentFormPropsType> = ({ videoId, onSubmit }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(videoId, inputValue);
+    mutate({ videoId, commentInput: inputValue });
     handleReset();
   };
 

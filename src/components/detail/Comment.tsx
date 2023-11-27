@@ -1,4 +1,5 @@
 import React from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import getElapsedTime from "utils/getElapsedTime";
 import { CommentType } from "types/commentItem";
 import { deleteCommentAPI } from "api/comment";
@@ -10,21 +11,19 @@ interface CommmetPropsType {
   item: CommentType;
   activeCommentId: number | null;
   setActiveCommentId: React.Dispatch<React.SetStateAction<number | null>>;
-  setComments: React.Dispatch<React.SetStateAction<CommentType[]>>;
 }
 
 const Comment: React.FC<CommmetPropsType> = ({
   item,
   activeCommentId,
   setActiveCommentId,
-  setComments,
 }) => {
-  const handleClickDeleteComment = (id: number) => async () => {
-    const deleteCommmet = await deleteCommentAPI(id);
-    setComments((comments) =>
-      comments.filter((comment) => comment.id !== deleteCommmet.id)
-    );
-  };
+  const queryClient = useQueryClient();
+  const { mutate } = useMutation({
+    mutationFn: (id: number) => deleteCommentAPI(id),
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: ["commentData"] }),
+  });
 
   return (
     <div className={styles["comment"]}>
@@ -52,7 +51,7 @@ const Comment: React.FC<CommmetPropsType> = ({
         <>
           <div className={styles["comment__button-list"]}>
             <button type="button">신고</button>
-            <button type="button" onClick={handleClickDeleteComment(item.id)}>
+            <button type="button" onClick={() => mutate(item.id)}>
               삭제
             </button>
           </div>
