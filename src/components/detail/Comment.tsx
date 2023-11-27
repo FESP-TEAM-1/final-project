@@ -2,7 +2,7 @@ import React from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import getElapsedTime from "utils/getElapsedTime";
 import { CommentType } from "types/commentItem";
-import { deleteCommentAPI } from "api/comment";
+import { deleteCommentAPI } from "api/detail";
 import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "styles/detail/Comment.module.css";

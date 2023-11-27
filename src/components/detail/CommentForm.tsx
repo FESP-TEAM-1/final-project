@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import styles from "styles/detail/CommentForm.module.css";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { insertCommentAPI } from "api/comment";
+import { insertCommentAPI } from "api/detail";
 import useHandleResizeHeight from "hooks/useHandleResizeHeight";
 
 interface CommentFormPropsType {

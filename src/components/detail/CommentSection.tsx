@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import CommentForm from "./CommentForm";
 import Comment from "./Comment";
-import { getCommentAPI } from "api/comment";
+import { getCommentAPI } from "api/detail";
 import { CommentType } from "types/commentItem";
 
 interface PropsType {
