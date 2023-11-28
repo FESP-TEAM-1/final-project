@@ -21,7 +21,7 @@ const useHandleScroll = (fetchNextPage: fetchNextPageType) => {
   const scrollFn = _.debounce(() => {
     if (
       window.innerHeight + document.documentElement.scrollTop >=
-      document.documentElement.offsetHeight
+      document.documentElement.offsetHeight - 10
     ) {
       fetchNextPage();
     }
