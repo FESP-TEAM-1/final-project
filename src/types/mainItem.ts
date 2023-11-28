@@ -62,3 +62,6 @@ interface Localized {
   title: string;
   description: string;
 }
+// review
+// types/mainitem.ts는 의도가 명확하게 보이지 않습니다. 아마 main 페이지에서 보여줄 아이템이라 그렇게 적으신것 같아요.
+// PopularVideo.ts 는 어떠신가요? 인터페이스명도 이와 비슷한 방식으로 바뀌면 좋을 것 같아요.
