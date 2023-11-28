@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const getVideoListAPI = async (pageParam: string) => {
   let data;
-  if (process.env.NODE_ENV === "production") {
+  if (process.env.NODE_ENV === "development") {
     const res = await axios.get("http://localhost:3000/videos/popular.json");
     data = res.data;
   } else {
