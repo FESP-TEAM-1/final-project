@@ -25,3 +25,6 @@ export const useItemStore = create(
     }
   )
 );
+
+// review
+// item이란 단어가 모호합니다. videoItem이라고 명명하는 게 어떤가요?
