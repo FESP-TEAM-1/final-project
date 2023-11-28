@@ -39,6 +39,9 @@ const RelatedCard: React.FC<RelatedCardType> = ({ item }) => {
       setIsHover(false);
     }
   };
+  // review
+  // handleHover라는 함수가 2가지 일을 하는 것 같아요
+  // handleEnterAutoPlay, handleLeaveAutoPlay 이런식으로 이름을 지어주면 좋을 것 같고요.
 
   return (
     <>
@@ -50,6 +53,7 @@ const RelatedCard: React.FC<RelatedCardType> = ({ item }) => {
         <div className={styles["card__cover"]} onClick={handleClickMove}>
           {isHover ? (
             <iframe
+              className="card__cover__iframe"
               src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0&rel=0`}
             ></iframe>
           ) : (

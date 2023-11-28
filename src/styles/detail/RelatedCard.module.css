@@ -30,6 +30,17 @@
   transform: translate(-50%, -50%);
 }
 
+/* review 
+상세페이지의 iframe도 이렇게 가운데 정렬로 맞추어주셔야합니다. */
+.card__cover__iframe {
+  width: 100%;
+  object-fit: contain;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .card__channel-title {
   font-size: 0.875rem;
   color: #686868;
