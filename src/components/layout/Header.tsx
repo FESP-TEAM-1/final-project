@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useThemeStore } from "stores/useThemeStore";
 import {
@@ -12,19 +17,18 @@ import styles from "styles/layout/Header.module.css";
 
 const Header = () => {
   const location = useLocation();
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const [isViewSearchBar, setIsViewSearchBar] = useState(false);
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState(searchParams.get("title") || "");
   const { darkMode, setDarkMode } = useThemeStore();
 
   const handleSubmitSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("search 검색 결과 창으로 이동");
     if (input.trim() !== "") navigate(`/search?title=${input}`);
   };
 
   const hanldeViewSearchBar = () => {
-    console.log("search bar 토글");
     setIsViewSearchBar((prev) => !prev);
   };
 
@@ -66,6 +70,7 @@ const Header = () => {
               type="text"
               className={styles["search__input"]}
               placeholder="제목으로 검색"
+              value={input}
               onChange={(e) => setInput(e.target.value)}
             />
             <button type="submit" className={styles["search__button"]}>
