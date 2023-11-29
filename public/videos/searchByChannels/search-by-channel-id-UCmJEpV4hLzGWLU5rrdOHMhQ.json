@@ -1,7 +1,7 @@
 {
   "kind": "youtube#searchListResponse",
   "etag": "t_f6b3e7VhblQpUNuAK2JmehcyU",
-  "nextPageToken": "CBQQAA",
+  "nextPageToken": "",
   "regionCode": "KR",
   "pageInfo": {
     "totalResults": 341,
