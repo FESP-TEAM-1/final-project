@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import decodeHTMLEntities from "utils/setDecodeHTMLEntities";
 import styles from "styles/detail/Video.module.css";
 import { getVideoAPI } from "api/detail";
+import { VideoSkeleton } from "./skeleton";
 
 const Video: React.FC = () => {
   const [searchParams] = useSearchParams();
@@ -20,7 +21,7 @@ const Video: React.FC = () => {
     queryFn: () => getVideoAPI(videoId, channelId),
   });
 
-  if (isLoading) return <div>loading ...</div>;
+  if (isLoading) return <VideoSkeleton />;
   if (error) return <div>{error.message}</div>;
 
   return (
@@ -40,25 +41,28 @@ const Video: React.FC = () => {
           {decodeHTMLEntities(videoData.snippet.channelTitle)}
         </p>
       </Link>
-      <div
-        className={`${styles["video-description"]} ${
-          !isOpen && styles["pointer"]
-        }`}
-        onClick={() => {
-          !isOpen && setIsOpen(true);
-        }}
-      >
-        <p
-          className={`${styles["video-description__content"]} ${
-            !isOpen && "ellipsis-multi"
+
+      {videoData.snippet.description && (
+        <div
+          className={`${styles["video-description"]} ${
+            !isOpen && styles["pointer"]
           }`}
+          onClick={() => {
+            !isOpen && setIsOpen(true);
+          }}
         >
-          {decodeHTMLEntities(videoData.snippet.description)}
-        </p>
-        <button type="button" onClick={() => setIsOpen(!isOpen)}>
-          {!isOpen ? "더보기" : "간략히"}
-        </button>
-      </div>
+          <p
+            className={`${styles["video-description__content"]} ${
+              !isOpen && "ellipsis-multi"
+            }`}
+          >
+            {decodeHTMLEntities(videoData.snippet.description)}
+          </p>
+          <button type="button" onClick={() => setIsOpen(!isOpen)}>
+            {!isOpen ? "더보기" : "간략히"}
+          </button>
+        </div>
+      )}
     </div>
   );
 };

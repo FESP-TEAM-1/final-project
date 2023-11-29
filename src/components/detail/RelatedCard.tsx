@@ -46,9 +46,12 @@ const RelatedCard: React.FC<RelatedCardType> = ({ item }) => {
       >
         <div className={styles["card__cover"]} onClick={handleClickMove}>
           {isHover ? (
-            <iframe
-              src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0&rel=0`}
-            ></iframe>
+            <>
+              <iframe
+                src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0&rel=0`}
+              ></iframe>
+              <div className="cover_dim"></div>
+            </>
           ) : (
             <img src={src} alt="" className={styles["card__cover__img"]} />
           )}
