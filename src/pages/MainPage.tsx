@@ -2,11 +2,13 @@ import React from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import Card from "components/main/Card";
 import MainSkeleton from "components/main/MainSkeleton";
-import { getVideoListAPI } from "api/main";
+import { useYoutubeApi } from "../context/YoutubeApiContext";
 import styles from "styles/main/MainPage.module.css";
 import useHandleScroll from "hooks/useHandleScroll";
 
 const MainPage: React.FC = () => {
+  const youtube = useYoutubeApi();
+
   const {
     status,
     data: youtubeData,
@@ -14,7 +16,7 @@ const MainPage: React.FC = () => {
     fetchNextPage,
   } = useInfiniteQuery({
     queryKey: ["projects"],
-    queryFn: ({ pageParam }) => getVideoListAPI(pageParam),
+    queryFn: ({ pageParam }) => youtube!.getVideoList(pageParam),
     initialPageParam: "",
     getNextPageParam: (lastPage) => lastPage.nextPageToken || undefined,
   });

@@ -1,13 +1,13 @@
-import React, { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import SearchCard from "components/search/SearchCard";
 import SearchSkeleton from "components/search/SearchSkeleton";
-import { getSearchVideoListAPI } from "api/search";
+import { useYoutubeApi } from "context/YoutubeApiContext";
 import styles from "styles/search/SearchPage.module.css";
 import useHandleScroll from "hooks/useHandleScroll";
 
 const SearchPage = () => {
+  const youtube = useYoutubeApi();
   const [searchParams] = useSearchParams();
 
   const {
@@ -18,7 +18,7 @@ const SearchPage = () => {
   } = useInfiniteQuery({
     queryKey: ["youtubeSearch", searchParams.get("title")!],
     queryFn: ({ pageParam }) =>
-      getSearchVideoListAPI(searchParams.get("title")!, pageParam),
+      youtube!.getSearchVideoList(searchParams.get("title")!, pageParam),
     initialPageParam: "",
     getNextPageParam: (lastPage) => lastPage.nextPageToken || undefined,
   });

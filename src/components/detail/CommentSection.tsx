@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import CommentForm from "./CommentForm";
 import Comment from "./Comment";
-import { getCommentAPI } from "api/detail";
+import { useYoutubeApi } from "context/YoutubeApiContext";
 import styles from "styles/detail/CommentSection.module.css";
 import { CommentSkeleton } from "./skeleton";
 
@@ -12,6 +12,7 @@ interface PropsType {
 
 const CommentSection: React.FC<PropsType> = ({ videoId }) => {
   const [activeCommentId, setActiveCommentId] = useState<number | null>(null);
+  const youtube = useYoutubeApi();
 
   const {
     status,
@@ -21,7 +22,7 @@ const CommentSection: React.FC<PropsType> = ({ videoId }) => {
     hasNextPage,
   } = useInfiniteQuery({
     queryKey: ["commentData", videoId],
-    queryFn: ({ pageParam }) => getCommentAPI(videoId, pageParam),
+    queryFn: ({ pageParam }) => youtube!.getComment(videoId, pageParam),
     initialPageParam: 0,
     getNextPageParam: (lastPage) => lastPage.nextPageToken || undefined,
   });

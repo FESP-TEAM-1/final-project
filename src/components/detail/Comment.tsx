@@ -2,7 +2,7 @@ import React from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import getElapsedTime from "utils/getElapsedTime";
 import { CommentType } from "types/commentItem";
-import { deleteCommentAPI } from "api/detail";
+import { useYoutubeApi } from "context/YoutubeApiContext";
 import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "styles/detail/Comment.module.css";
@@ -21,9 +21,10 @@ const Comment: React.FC<CommmetPropsType> = ({
   setActiveCommentId,
   videoId,
 }) => {
+  const youtube = useYoutubeApi();
   const queryClient = useQueryClient();
   const { mutate } = useMutation({
-    mutationFn: (id: number) => deleteCommentAPI(id),
+    mutationFn: (id: number) => youtube!.deleteComment(id),
     onSuccess: () =>
       queryClient.invalidateQueries({ queryKey: ["commentData", videoId] }),
   });

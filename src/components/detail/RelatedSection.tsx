@@ -2,12 +2,13 @@ import React from "react";
 import { useSearchParams } from "react-router-dom";
 import RelatedCard from "./RelatedCard";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { getChannelDataAPI } from "api/detail";
+import { useYoutubeApi } from "context/YoutubeApiContext";
 import styles from "styles/detail/RelatedSection.module.css";
 import useHandleScroll from "hooks/useHandleScroll";
 import { RelatedSkeleton } from "./skeleton";
 
 const RelatedSection: React.FC = () => {
+  const youtube = useYoutubeApi();
   const [searchParams] = useSearchParams();
   const videoId = searchParams.get("id")!;
   const channelId = searchParams.get("channelId")!;
@@ -19,7 +20,7 @@ const RelatedSection: React.FC = () => {
     fetchNextPage,
   } = useInfiniteQuery({
     queryKey: ["channelData", channelId],
-    queryFn: ({ pageParam }) => getChannelDataAPI(channelId, pageParam),
+    queryFn: ({ pageParam }) => youtube!.getChannelData(channelId, pageParam),
     initialPageParam: "",
     getNextPageParam: (lastPage) => lastPage.nextPageToken || undefined,
   });

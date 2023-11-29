@@ -3,10 +3,11 @@ import { Link, useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import decodeHTMLEntities from "utils/setDecodeHTMLEntities";
 import styles from "styles/detail/Video.module.css";
-import { getVideoAPI } from "api/detail";
+import { useYoutubeApi } from "context/YoutubeApiContext";
 import { VideoSkeleton } from "./skeleton";
 
 const Video: React.FC = () => {
+  const youtube = useYoutubeApi();
   const [searchParams] = useSearchParams();
   const videoId = searchParams.get("id")!;
   const channelId = searchParams.get("channelId")!;
@@ -18,7 +19,7 @@ const Video: React.FC = () => {
     data: videoData,
   } = useQuery({
     queryKey: ["videoData", videoId],
-    queryFn: () => getVideoAPI(videoId, channelId),
+    queryFn: () => youtube!.getVideo(videoId, channelId),
   });
 
   if (isLoading) return <VideoSkeleton />;
