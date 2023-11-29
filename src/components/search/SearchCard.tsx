@@ -1,15 +1,18 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import getElapsedTime from "utils/getElapsedTime";
 import { YoutubeItem } from "types/mainItem";
 import styles from "styles/search/SearchCard.module.css";
 import decodeHTMLEntities from "utils/setDecodeHTMLEntities";
+import useImgLazyLoading from "hooks/useImgLazyLoading";
 
 interface PropsType {
   item: YoutubeItem;
 }
 
 const SearchCard: React.FC<PropsType> = ({ item }) => {
+  const imgRef = useRef<HTMLImageElement>(null);
+  useImgLazyLoading(imgRef);
   const navigate = useNavigate();
   const [isHover, setIsHover] = useState(false);
   const [hoverTimeout, setHoverTimeout] = useState<number | null>(null);
@@ -51,7 +54,12 @@ const SearchCard: React.FC<PropsType> = ({ item }) => {
             <div className="cover_dim"></div>
           </>
         ) : (
-          <img src={src} alt="" className={styles["card__cover__img"]} />
+          <img
+            data-src={src}
+            ref={imgRef}
+            alt=""
+            className={styles["card__cover__img"]}
+          />
         )}
       </div>
       <div>

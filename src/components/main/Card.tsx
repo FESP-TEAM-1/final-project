@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useThemeStore } from "stores/useThemeStore";
 import getElapsedTime from "utils/getElapsedTime";
@@ -6,6 +6,7 @@ import decodeHTMLEntities from "utils/setDecodeHTMLEntities";
 import useHoverHandler from "hooks/useHandleHover";
 import { YoutubeItem } from "types/mainItem";
 import styles from "styles/main/Card.module.css";
+import useImgLazyLoading from "hooks/useImgLazyLoading";
 
 interface CardItemType {
   item: YoutubeItem;
@@ -19,6 +20,7 @@ const Card: React.FC<CardItemType> = ({ item }) => {
     isElementOnFarLeft,
     handleHover,
   } = useHoverHandler();
+  const imgRef = useRef<HTMLImageElement>(null);
   const navigate = useNavigate();
   const { darkMode } = useThemeStore();
   const { id } = item;
@@ -29,6 +31,8 @@ const Card: React.FC<CardItemType> = ({ item }) => {
   const handleClickMove = () => {
     navigate(`/videos?id=${id}&channelId=${channelId}`);
   };
+
+  useImgLazyLoading(imgRef);
 
   return (
     <>
@@ -52,7 +56,12 @@ const Card: React.FC<CardItemType> = ({ item }) => {
               <div className="cover_dim"></div>
             </>
           ) : (
-            <img src={src} alt="" className={styles["card__cover__img"]} />
+            <img
+              data-src={src}
+              ref={imgRef}
+              alt=""
+              className={styles["card__cover__img"]}
+            />
           )}
         </div>
         <Link to={`/channel?${channelId}`} style={{ width: "fit-content" }}>

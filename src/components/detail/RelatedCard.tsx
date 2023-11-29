@@ -1,15 +1,19 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import getElapsedTime from "utils/getElapsedTime";
 import { ChannelItem } from "types/detailItem";
 import styles from "styles/detail/RelatedCard.module.css";
 import decodeHTMLEntities from "utils/setDecodeHTMLEntities";
+import useImgLazyLoading from "hooks/useImgLazyLoading";
 
 interface RelatedCardType {
   item: ChannelItem;
 }
 
 const RelatedCard: React.FC<RelatedCardType> = ({ item }) => {
+  const imgRef = useRef<HTMLImageElement>(null);
+  useImgLazyLoading(imgRef);
+
   const navigate = useNavigate();
   const [isHover, setIsHover] = useState(false);
   const [hoverTimeout, setHoverTimeout] = useState<number | null>(null);
@@ -53,7 +57,11 @@ const RelatedCard: React.FC<RelatedCardType> = ({ item }) => {
               <div className="cover_dim"></div>
             </>
           ) : (
-            <img src={src} alt="" className={styles["card__cover__img"]} />
+            <img
+              data-src={src}
+              ref={imgRef}
+              className={styles["card__cover__img"]}
+            />
           )}
         </div>
         <div>
