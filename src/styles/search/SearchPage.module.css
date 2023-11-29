@@ -1,4 +1,11 @@
 .main {
-  margin: 0 auto 50px;
+  margin: 50px auto;
   gap: 3.125rem 1.25rem;
+  width: 1096px;
+}
+
+@media (max-width: 1159px) {
+  .main {
+    width: auto;
+  }
 }

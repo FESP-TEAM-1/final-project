@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import SearchCard from "components/search/SearchCard";
@@ -9,6 +9,7 @@ import useHandleScroll from "hooks/useHandleScroll";
 
 const SearchPage = () => {
   const [searchParams] = useSearchParams();
+  const [zoom, setZoom] = useState(1);
 
   const {
     status,
@@ -25,6 +26,21 @@ const SearchPage = () => {
 
   useHandleScroll(fetchNextPage);
 
+  const handleResize = () => {
+    const mainWidth = 1096;
+    const width = window.innerWidth;
+    const newZoom = width < mainWidth ? width / mainWidth : 1;
+    setZoom(newZoom);
+  };
+
+  useEffect(() => {
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   if (status === "pending") return <SearchSkeleton />;
   if (status === "error")
     return <>{"An error has occurred: " + error.message}</>;
@@ -32,7 +48,7 @@ const SearchPage = () => {
     return <>검색 결과가 없습니다!</>;
 
   return (
-    <main className={styles.main}>
+    <main className={styles.main} style={{ zoom: zoom }}>
       {youtubeData.pages
         .flatMap((page) => page.items)
         .map((item, i) => {
