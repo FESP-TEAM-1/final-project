@@ -34,6 +34,13 @@ const GlobalStyle = createGlobalStyle`
     inset: 0;
   }
 
+  .cover_dim {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+  }
+
   button {
     border: 0;
     margin: 0;
@@ -80,6 +87,7 @@ const GlobalStyle = createGlobalStyle`
     --icon-color: var(--color-black);
     --border-color: var(--dark-gray);
     --button-color: var(--gray);
+    --comment-more-button-color: rgba(0,0,0,0.1);
     --textarea-bg-color: #fff;
     --el-text-color: var(--color-black);
     --scroll-bg-color: #fff;
@@ -97,6 +105,7 @@ const GlobalStyle = createGlobalStyle`
     --icon-color: var(--color-white);
     --border-color: var(--light-gray);
     --button-color: #272727;
+    --comment-more-button-color: rgba(255,255,255,0.2);
     --textarea-bg-color: rgb(15,15,15);
     --el-text-color: var(--color-white);
     --scroll-bg-color: rgb(15,15,15);
