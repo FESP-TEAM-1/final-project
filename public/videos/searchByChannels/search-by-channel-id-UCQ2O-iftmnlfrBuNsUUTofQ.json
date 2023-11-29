@@ -1,7 +1,7 @@
 {
   "kind": "youtube#searchListResponse",
   "etag": "J6oczMtsClWo4gaFNawpvOuSmzY",
-  "nextPageToken": "CBQQAA",
+  "nextPageToken": "",
   "regionCode": "KR",
   "pageInfo": {
     "totalResults": 1067,
@@ -18,7 +18,7 @@
       "snippet": {
         "publishedAt": "2022-08-10T02:24:59Z",
         "channelId": "UCQ2O-iftmnlfrBuNsUUTofQ",
-        "title": "[직캠] 🖤JI-LACK PINK💖 - 마지막처럼", 
+        "title": "[직캠] 🖤JI-LACK PINK💖 - 마지막처럼",
         "description": "지구로 도망간 달나라 토끼를 잡기 위해 뭉친 4명의 용사들이 시공간을 넘나들며 펼치는 신개념 하이브리드 멀티버스 액션 어드벤쳐 ...",
         "thumbnails": {
           "default": {

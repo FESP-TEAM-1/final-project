@@ -1,10 +1,11 @@
 import React from "react";
 import { useSearchParams } from "react-router-dom";
 import RelatedCard from "./RelatedCard";
-import { ChannelItem } from "types/detailItem";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { getChannelDataAPI } from "api/detail";
 import styles from "styles/detail/RelatedSection.module.css";
+import useHandleScroll from "hooks/useHandleScroll";
+import { RelatedSkeleton } from "./skeleton";
 
 const RelatedSection: React.FC = () => {
   const [searchParams] = useSearchParams();
@@ -12,29 +13,37 @@ const RelatedSection: React.FC = () => {
   const channelId = searchParams.get("channelId")!;
 
   const {
-    isLoading,
-    error,
+    status,
     data: channelData,
-  } = useQuery({
-    queryKey: ["channelData"],
-    queryFn: () => getChannelDataAPI(channelId),
+    error,
+    fetchNextPage,
+  } = useInfiniteQuery({
+    queryKey: ["channelData", channelId],
+    queryFn: ({ pageParam }) => getChannelDataAPI(channelId, pageParam),
+    initialPageParam: "",
+    getNextPageParam: (lastPage) => lastPage.nextPageToken || undefined,
   });
 
-  if (isLoading) return <div>loading...axios</div>;
-  if (error) return <>{"An error has occurred: " + error.message}</>;
+  useHandleScroll(fetchNextPage);
+
+  if (status === "pending") return <RelatedSkeleton />;
+  if (status === "error")
+    return <>{"An error has occurred: " + error.message}</>;
 
   return (
     <>
       <h2 className={styles["related-title"]}>관련된 영상</h2>
       <ul>
-        {channelData!.items.map((item: ChannelItem) => {
-          if (item.id.videoId === videoId) return;
-          return (
-            <li key={item.id.videoId}>
-              <RelatedCard item={item} />
-            </li>
-          );
-        })}
+        {channelData!.pages
+          .flatMap((page) => page.items)
+          .map((item, i) => {
+            if (item.id.videoId === videoId) return;
+            return (
+              <li key={i}>
+                <RelatedCard item={item} />
+              </li>
+            );
+          })}
       </ul>
     </>
   );

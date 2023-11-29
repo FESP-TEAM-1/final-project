@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import React, { useState } from "react";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import CommentForm from "./CommentForm";
 import Comment from "./Comment";
 import { getCommentAPI } from "api/detail";
-import { CommentType } from "types/commentItem";
+import styles from "styles/detail/CommentSection.module.css";
 
 interface PropsType {
   videoId: string;
@@ -13,34 +13,52 @@ const CommentSection: React.FC<PropsType> = ({ videoId }) => {
   const [activeCommentId, setActiveCommentId] = useState<number | null>(null);
 
   const {
-    isLoading,
-    error,
+    status,
     data: commentData,
-  } = useQuery({
+    error,
+    fetchNextPage,
+    hasNextPage,
+  } = useInfiniteQuery({
     queryKey: ["commentData", videoId],
-    queryFn: () => getCommentAPI(videoId),
+    queryFn: ({ pageParam }) => getCommentAPI(videoId, pageParam),
+    initialPageParam: 0,
+    getNextPageParam: (lastPage) => lastPage.nextPageToken || undefined,
   });
 
-  if (isLoading) return <div>loading...</div>;
-  if (error) return <>{"An error has occurred: " + error.message}</>;
+  if (status === "pending") return <div>loading...</div>;
+  if (status === "error")
+    return <>{"An error has occurred: " + error.message}</>;
 
   return (
     <>
       <section>
-        <h3 className={"a11y-hidden"}>댓글 총 {commentData!.length}개</h3>
+        <h3 className={styles["comment-section__title"]}>
+          댓글 {commentData.pages[0]["pageInfo"]["totalResults"]}개
+        </h3>
         <CommentForm videoId={videoId} />
         <ul>
-          {commentData!.map((comment) => (
-            <li key={comment.id}>
-              <Comment
-                item={comment}
-                activeCommentId={activeCommentId}
-                setActiveCommentId={setActiveCommentId}
-                videoId={videoId}
-              />
-            </li>
-          ))}
+          {commentData.pages
+            .flatMap((page) => page.items)
+            .map((comment) => (
+              <li key={comment.id}>
+                <Comment
+                  item={comment}
+                  activeCommentId={activeCommentId}
+                  setActiveCommentId={setActiveCommentId}
+                  videoId={videoId}
+                />
+              </li>
+            ))}
         </ul>
+        {hasNextPage && (
+          <button
+            type="button"
+            onClick={() => fetchNextPage()}
+            className={styles["comment__more_button"]}
+          >
+            더보기
+          </button>
+        )}
       </section>
     </>
   );
