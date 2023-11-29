@@ -9,7 +9,7 @@ export const getSearchVideoListAPI = async (
   let data, filteredItems;
   // 개발 서버
   if (process.env.NODE_ENV === "development") {
-    const res = await axios.get("http://localhost:3000/videos/popular.json");
+    const res = await axios.get("/videos/popular.json");
     data = res.data;
     filteredItems = data.items.filter((i: YoutubeItem) =>
       i.snippet.title.toLowerCase().includes(titleToLowerCase)
