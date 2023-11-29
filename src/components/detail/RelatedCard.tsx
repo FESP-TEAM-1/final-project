@@ -1,22 +1,22 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import getElapsedTime from "utils/getElapsedTime";
 import { ChannelItem } from "types/detailItem";
-import styles from "styles/detail/RelatedCard.module.css";
+import getElapsedTime from "utils/getElapsedTime";
 import decodeHTMLEntities from "utils/setDecodeHTMLEntities";
 import useImgLazyLoading from "hooks/useImgLazyLoading";
+import useHandleHover from "hooks/useHandleHover";
+import styles from "styles/detail/RelatedCard.module.css";
 
 interface RelatedCardType {
   item: ChannelItem;
 }
 
 const RelatedCard: React.FC<RelatedCardType> = ({ item }) => {
+  const { isHover, handleHover } = useHandleHover();
   const imgRef = useRef<HTMLImageElement>(null);
   useImgLazyLoading(imgRef);
 
   const navigate = useNavigate();
-  const [isHover, setIsHover] = useState(false);
-  const [hoverTimeout, setHoverTimeout] = useState<number | null>(null);
   const { url: src } = item.snippet.thumbnails.high;
   const {
     id: { videoId },
@@ -26,19 +26,6 @@ const RelatedCard: React.FC<RelatedCardType> = ({ item }) => {
 
   const handleClickMove = () => {
     navigate(`/videos?id=${videoId}&channelId=${channelId}`);
-  };
-
-  const handleHover = (event: string) => {
-    if (event === "enter") {
-      const timeoutId = window.setTimeout(() => {
-        setIsHover(true);
-      }, 500);
-      setHoverTimeout(timeoutId);
-    } else {
-      // 마우스가 엘리먼트를 떠나는 경우
-      if (hoverTimeout) clearTimeout(hoverTimeout);
-      setIsHover(false);
-    }
   };
 
   return (
@@ -52,6 +39,7 @@ const RelatedCard: React.FC<RelatedCardType> = ({ item }) => {
           {isHover ? (
             <>
               <iframe
+                className={styles["card__cover__iframe"]}
                 src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0&rel=0`}
               ></iframe>
               <div className="cover_dim"></div>
