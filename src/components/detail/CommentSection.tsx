@@ -4,6 +4,7 @@ import CommentForm from "./CommentForm";
 import Comment from "./Comment";
 import { getCommentAPI } from "api/detail";
 import styles from "styles/detail/CommentSection.module.css";
+import { CommentSkeleton } from "./skeleton";
 
 interface PropsType {
   videoId: string;
@@ -25,7 +26,7 @@ const CommentSection: React.FC<PropsType> = ({ videoId }) => {
     getNextPageParam: (lastPage) => lastPage.nextPageToken || undefined,
   });
 
-  if (status === "pending") return <div>loading...</div>;
+  if (status === "pending") return <CommentSkeleton />;
   if (status === "error")
     return <>{"An error has occurred: " + error.message}</>;
 
