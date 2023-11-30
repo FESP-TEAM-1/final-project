@@ -4,3 +4,9 @@
   margin: 0 auto 100px;
   gap: 1.875rem 0.625rem;
 }
+
+@media screen and (max-width: 365px) {
+  .main {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
