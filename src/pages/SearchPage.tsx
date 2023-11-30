@@ -2,12 +2,12 @@ import { useSearchParams } from "react-router-dom";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import SearchCard from "components/search/SearchCard";
 import SearchSkeleton from "components/search/SearchSkeleton";
-import { useYoutubeApi } from "context/YoutubeApiContext";
-import styles from "styles/search/SearchPage.module.css";
+import useYoutubeApiStore from "stores/useYoutubeApiStore";
 import useHandleScroll from "hooks/useHandleScroll";
+import styles from "styles/search/SearchPage.module.css";
 
 const SearchPage = () => {
-  const youtube = useYoutubeApi();
+  const { youtube } = useYoutubeApiStore();
   const [searchParams] = useSearchParams();
 
   const {

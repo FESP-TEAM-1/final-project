@@ -2,7 +2,7 @@ import React from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import getElapsedTime from "utils/getElapsedTime";
 import { CommentType } from "types/commentItem";
-import { useYoutubeApi } from "context/YoutubeApiContext";
+import useYoutubeApiStore from "stores/useYoutubeApiStore";
 import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "styles/detail/Comment.module.css";
@@ -21,7 +21,7 @@ const Comment: React.FC<CommmetPropsType> = ({
   setActiveCommentId,
   videoId,
 }) => {
-  const youtube = useYoutubeApi();
+  const { youtube } = useYoutubeApiStore();
   const queryClient = useQueryClient();
   const { mutate } = useMutation({
     mutationFn: (id: number) => youtube!.deleteComment(id),
