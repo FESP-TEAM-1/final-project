@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import CommentForm from "./CommentForm";
 import Comment from "./Comment";
-import { getCommentAPI } from "api/detail";
-import styles from "styles/detail/CommentSection.module.css";
 import { CommentSkeleton } from "./skeleton";
+import useYoutubeApiStore from "stores/useYoutubeApiStore";
+import styles from "styles/detail/CommentSection.module.css";
 
 interface PropsType {
   videoId: string;
@@ -12,7 +12,7 @@ interface PropsType {
 
 const CommentSection: React.FC<PropsType> = ({ videoId }) => {
   const [activeCommentId, setActiveCommentId] = useState<number | null>(null);
-
+  const { youtube } = useYoutubeApiStore();
   const {
     status,
     data: commentData,
@@ -21,9 +21,10 @@ const CommentSection: React.FC<PropsType> = ({ videoId }) => {
     hasNextPage,
   } = useInfiniteQuery({
     queryKey: ["commentData", videoId],
-    queryFn: ({ pageParam }) => getCommentAPI(videoId, pageParam),
+    queryFn: ({ pageParam }) => youtube!.getComment(videoId, pageParam),
     initialPageParam: 0,
     getNextPageParam: (lastPage) => lastPage.nextPageToken || undefined,
+    select: (data) => data.pages,
   });
 
   if (status === "pending") return <CommentSkeleton />;
@@ -34,11 +35,11 @@ const CommentSection: React.FC<PropsType> = ({ videoId }) => {
     <>
       <section>
         <h3 className={styles["comment-section__title"]}>
-          댓글 {commentData.pages[0]["pageInfo"]["totalResults"]}개
+          댓글 {commentData[0]["pageInfo"]["totalResults"]}개
         </h3>
         <CommentForm videoId={videoId} />
         <ul>
-          {commentData.pages
+          {commentData
             .flatMap((page) => page.items)
             .map((comment) => (
               <li key={comment.id}>

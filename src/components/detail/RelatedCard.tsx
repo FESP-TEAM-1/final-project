@@ -18,11 +18,8 @@ const RelatedCard: React.FC<RelatedCardType> = ({ item }) => {
 
   const navigate = useNavigate();
   const { url: src } = item.snippet.thumbnails.high;
-  const {
-    id: { videoId },
-  } = item;
-  const { title, channelTitle, channelId, publishedAt, description } =
-    item.snippet;
+  const { videoId } = item.snippet.resourceId;
+  const { title, channelTitle, channelId, publishedAt } = item.snippet;
 
   const handleClickMove = () => {
     navigate(`/videos?id=${videoId}&channelId=${channelId}`);

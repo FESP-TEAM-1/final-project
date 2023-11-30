@@ -33,6 +33,7 @@ export interface Snippet {
   channelTitle: string;
   liveBroadcastContent: string;
   publishTime: string;
+  resourceId: { kind: string; videoId: string };
 }
 
 export interface Thumbnails {

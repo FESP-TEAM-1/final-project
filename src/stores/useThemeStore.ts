@@ -9,11 +9,11 @@ interface useThemeStoreType {
 export const useThemeStore = create(
   persist<useThemeStoreType>(
     (set) => ({
-        darkMode: false,
-        setDarkMode: (val) => {
-          set(() => ({ darkMode: val }));
-          document.body.dataset.theme = val ? 'dark' : 'light';
-        }
+      darkMode: false,
+      setDarkMode: (val) => {
+        set(() => ({ darkMode: val }));
+        document.body.dataset.theme = val ? "dark" : "light";
+      },
     }),
     {
       name: "darkMode-storage",

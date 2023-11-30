@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import styles from "styles/detail/CommentForm.module.css";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { insertCommentAPI } from "api/detail";
+import useYoutubeApiStore from "stores/useYoutubeApiStore";
 import useHandleResizeHeight from "hooks/useHandleResizeHeight";
 
 interface CommentFormPropsType {
@@ -14,6 +14,7 @@ interface paramsType {
 }
 
 const CommentForm: React.FC<CommentFormPropsType> = ({ videoId }) => {
+  const { youtube } = useYoutubeApiStore();
   const [inputValue, setInputValue] = useState("");
   const [isBtnView, setIsBtnView] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
@@ -21,7 +22,7 @@ const CommentForm: React.FC<CommentFormPropsType> = ({ videoId }) => {
   const queryClient = useQueryClient();
 
   const { mutate } = useMutation({
-    mutationFn: (data: paramsType) => insertCommentAPI(data),
+    mutationFn: (data: paramsType) => youtube!.insertComment(data),
     onSuccess: () =>
       queryClient.invalidateQueries({ queryKey: ["commentData", videoId] }),
   });

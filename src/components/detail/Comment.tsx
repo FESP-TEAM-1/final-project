@@ -1,6 +1,7 @@
 import React from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { CommentType } from "types/commentItem";
+import useYoutubeApiStore from "stores/useYoutubeApiStore";
 import { deleteCommentAPI } from "api/detail";
 import getElapsedTime from "utils/getElapsedTime";
 import decodeHTMLEntities from "utils/setDecodeHTMLEntities";
@@ -21,9 +22,10 @@ const Comment: React.FC<CommmetPropsType> = ({
   setActiveCommentId,
   videoId,
 }) => {
+  const { youtube } = useYoutubeApiStore();
   const queryClient = useQueryClient();
   const { mutate } = useMutation({
-    mutationFn: (id: number) => deleteCommentAPI(id),
+    mutationFn: (id: number) => youtube!.deleteComment(id),
     onSuccess: () =>
       queryClient.invalidateQueries({ queryKey: ["commentData", videoId] }),
   });
