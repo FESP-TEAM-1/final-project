@@ -1,48 +1,37 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import getElapsedTime from "utils/getElapsedTime";
-import { YoutubeItem } from "types/mainItem";
-import styles from "styles/search/SearchCard.module.css";
-import decodeHTMLEntities from "utils/setDecodeHTMLEntities";
 import useImgLazyLoading from "hooks/useImgLazyLoading";
+import useHandleHover from "hooks/useHandleHover";
+import getElapsedTime from "utils/getElapsedTime";
+import decodeHTMLEntities from "utils/setDecodeHTMLEntities";
+import { YoutubeItem } from "types/popularVideo";
+import styles from "styles/search/SearchCard.module.css";
 
 interface PropsType {
   item: YoutubeItem;
 }
 
 const SearchCard: React.FC<PropsType> = ({ item }) => {
-  const imgRef = useRef<HTMLImageElement>(null);
-  useImgLazyLoading(imgRef);
   const navigate = useNavigate();
-  const [isHover, setIsHover] = useState(false);
-  const [hoverTimeout, setHoverTimeout] = useState<number | null>(null);
   const { url: src } = item.snippet.thumbnails.high;
   const { id: videoId } = item;
   const { title, channelTitle, channelId, publishedAt, description } =
     item.snippet;
 
+  const { isHover, handleEnterAutoPlay, handleLeaveAutoPlay } =
+    useHandleHover();
+  const imgRef = useRef<HTMLImageElement>(null);
+  useImgLazyLoading(imgRef);
+
   const handleClickMove = () => {
     navigate(`/videos?id=${videoId}&channelId=${channelId}`);
-  };
-
-  const handleHover = (event: string) => {
-    if (event === "enter") {
-      const timeoutId = window.setTimeout(() => {
-        setIsHover(true);
-      }, 500);
-      setHoverTimeout(timeoutId);
-    } else {
-      // 마우스가 엘리먼트를 떠나는 경우
-      if (hoverTimeout) clearTimeout(hoverTimeout);
-      setIsHover(false);
-    }
   };
 
   return (
     <article
       className={styles["card"]}
-      onMouseEnter={() => handleHover("enter")}
-      onMouseLeave={() => handleHover("leave")}
+      onMouseEnter={handleEnterAutoPlay}
+      onMouseLeave={handleLeaveAutoPlay}
     >
       <div className={styles["card__cover"]} onClick={handleClickMove}>
         {isHover ? (

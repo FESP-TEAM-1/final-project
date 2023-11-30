@@ -24,21 +24,19 @@ const useHandleHover = () => {
     };
   }, [hoverTimeout]);
 
-  const handleHover = (event: string) => {
-    if (event === "enter") {
-      const timeoutId = window.setTimeout(() => {
-        setIsHover(true);
-        console.log("Hover state set to true");
-      }, 500);
-      setHoverTimeout(timeoutId);
-    } else {
-      // 마우스가 엘리먼트를 떠나는 경우
-      if (hoverTimeout) clearTimeout(hoverTimeout);
-      setIsHover(false);
-      console.log("Hover state set to false");
-    }
+  const handleEnterAutoPlay = () => {
+    const timeoutId = window.setTimeout(() => {
+      setIsHover(true);
+    }, 500);
+    setHoverTimeout(timeoutId);
   };
-  return { isHover, handleHover };
+
+  const handleLeaveAutoPlay = () => {
+    if (hoverTimeout) clearTimeout(hoverTimeout);
+    setIsHover(false);
+  };
+
+  return { isHover, handleEnterAutoPlay, handleLeaveAutoPlay };
 };
 
 export default useHandleHover;

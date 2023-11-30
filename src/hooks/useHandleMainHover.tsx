@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 const useHandleMainHover = () => {
   const [isHover, setIsHover] = useState(false);
@@ -27,7 +27,7 @@ const useHandleMainHover = () => {
     };
   }, [hoverTimeout]);
 
-  const handleHover = (e: React.MouseEvent, event: string) => {
+  const handleEnterAutoPlay = (e: React.MouseEvent, event: string) => {
     if (event === "enter" && e) {
       // 마우스가 엘리먼트에 진입하는 경우
       const currentTargetRight = e.currentTarget.getBoundingClientRect().right;
@@ -50,14 +50,16 @@ const useHandleMainHover = () => {
 
       const timeoutId = window.setTimeout(() => {
         setIsHover(true);
-        console.log("Hover state set to true");
       }, 500);
       setHoverTimeout(timeoutId);
-    } else {
+    }
+  };
+
+  const handleLeaveAutoPlay = (e: React.MouseEvent, event: string) => {
+    if (event === "leave" && e) {
       // 마우스가 엘리먼트를 떠나는 경우
       if (hoverTimeout) clearTimeout(hoverTimeout);
       setIsHover(false);
-      console.log("Hover state set to false");
     }
   };
 
@@ -66,7 +68,8 @@ const useHandleMainHover = () => {
     isElementSingle,
     isElementOnFarRight,
     isElementOnFarLeft,
-    handleHover,
+    handleEnterAutoPlay,
+    handleLeaveAutoPlay,
   };
 };
 
