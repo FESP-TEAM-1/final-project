@@ -2,7 +2,6 @@ import React from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { CommentType } from "types/commentItem";
 import useYoutubeApiStore from "stores/useYoutubeApiStore";
-import { deleteCommentAPI } from "api/detail";
 import getElapsedTime from "utils/getElapsedTime";
 import decodeHTMLEntities from "utils/setDecodeHTMLEntities";
 import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
