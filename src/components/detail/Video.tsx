@@ -1,29 +1,31 @@
 import React, { useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import { VideoSkeleton } from "./skeleton";
+import { YoutubeItem, Snippet } from "types/mainItem";
+import useYoutubeApiStore from "stores/useYoutubeApiStore";
 import decodeHTMLEntities from "utils/setDecodeHTMLEntities";
 import styles from "styles/detail/Video.module.css";
-import { useYoutubeApi } from "context/YoutubeApiContext";
-import { VideoSkeleton } from "./skeleton";
 
 const Video: React.FC = () => {
-  const youtube = useYoutubeApi();
+  const { youtube } = useYoutubeApiStore();
   const [searchParams] = useSearchParams();
   const videoId = searchParams.get("id")!;
   const channelId = searchParams.get("channelId")!;
   const [isOpen, setIsOpen] = useState(false);
 
   const {
-    isLoading,
-    error,
+    status,
     data: videoData,
-  } = useQuery({
+    error,
+  } = useQuery<YoutubeItem, Error, Snippet>({
     queryKey: ["videoData", videoId],
     queryFn: () => youtube!.getVideo(videoId, channelId),
+    select: (videoData) => videoData.snippet,
   });
 
-  if (isLoading) return <VideoSkeleton />;
-  if (error) return <div>{error.message}</div>;
+  if (status === "pending") return <VideoSkeleton />;
+  if (status === "error") return <div>{error.message}</div>;
 
   return (
     <div className={styles["video-container"]}>
@@ -35,15 +37,15 @@ const Video: React.FC = () => {
         ></iframe>
       </div>
       <h3 className={styles["video-title"]}>
-        {decodeHTMLEntities(videoData.title)}
+        {decodeHTMLEntities(videoData?.title)}
       </h3>
-      <Link to={`/channel/${videoData.snippet.channelId}`}>
+      <Link to={`/channel/${videoData?.channelId}`}>
         <p className={styles["video-channel-title"]}>
-          {decodeHTMLEntities(videoData.snippet.channelTitle)}
+          {decodeHTMLEntities(videoData?.channelTitle)}
         </p>
       </Link>
 
-      {videoData.snippet.description && (
+      {videoData?.description && (
         <div
           className={`${styles["video-description"]} ${
             !isOpen && styles["pointer"]
@@ -57,7 +59,7 @@ const Video: React.FC = () => {
               !isOpen && "ellipsis-multi"
             }`}
           >
-            {decodeHTMLEntities(videoData.snippet.description)}
+            {decodeHTMLEntities(videoData?.description)}
           </p>
           <button type="button" onClick={() => setIsOpen(!isOpen)}>
             {!isOpen ? "더보기" : "간략히"}
