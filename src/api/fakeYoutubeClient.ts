@@ -1,6 +1,6 @@
 import axios from "axios";
 import { ChannelData, ChannelItem } from "types/detailItem";
-import { YoutubeItem } from "types/mainItem";
+import { YoutubeItem } from "types/popularVideo";
 
 export default class FakeYoutubeClient {
   async getVideoAPI(videoId: string, channelId: string) {
