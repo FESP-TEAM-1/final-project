@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import SearchCard from "components/search/SearchCard";
