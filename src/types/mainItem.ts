@@ -5,7 +5,7 @@ export interface YoutubeItem {
   snippet: Snippet;
 }
 
-interface Snippet {
+export interface Snippet {
   publishedAt: string;
   channelId: string;
   title: string;

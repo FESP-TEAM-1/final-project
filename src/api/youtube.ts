@@ -23,9 +23,7 @@ export default class Youtube {
 
   // 채널 영상 리스트 조회
   async getChannelData(channelId: string, pageParam: string) {
-    return this.apiClient
-      .getChannelDataAPI(channelId, pageParam)
-      .then((res: AxiosResponse) => res.data);
+    return this.apiClient.getChannelDataAPI(channelId, pageParam);
   }
 
   // 검색 영상 리스트 조회

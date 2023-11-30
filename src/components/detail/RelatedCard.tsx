@@ -18,11 +18,8 @@ const RelatedCard: React.FC<RelatedCardType> = ({ item }) => {
   const [isHover, setIsHover] = useState(false);
   const [hoverTimeout, setHoverTimeout] = useState<number | null>(null);
   const { url: src } = item.snippet.thumbnails.high;
-  const {
-    id: { videoId },
-  } = item;
-  const { title, channelTitle, channelId, publishedAt, description } =
-    item.snippet;
+  const { videoId } = item.snippet.resourceId;
+  const { title, channelTitle, channelId, publishedAt } = item.snippet;
 
   const handleClickMove = () => {
     navigate(`/videos?id=${videoId}&channelId=${channelId}`);

@@ -46,9 +46,10 @@ export default class YoutubeClient {
       maxResults: 10,
       pageToken: pageParam,
     };
-    return await this.httpClient.get(`playlistItems`, {
+    const { data } = await this.httpClient.get(`playlistItems`, {
       params: paramsPlaylistItems,
     });
+    return data;
   }
 
   async getSearchVideoListAPI(title: string, pageParam: string) {

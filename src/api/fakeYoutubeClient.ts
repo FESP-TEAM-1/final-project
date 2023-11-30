@@ -27,9 +27,20 @@ export default class FakeYoutubeClient {
   }
 
   async getChannelDataAPI(channelId: string, _pageParam: string) {
-    return await axios<ChannelData>(
+    const res = await axios<ChannelData>(
       `/videos/searchByChannels/search-by-channel-id-${channelId}.json`
     );
+
+    const data = res.data.items.map((item) => ({
+      ...item,
+      snippet: {
+        ...item.snippet,
+        resourceId: {
+          videoId: item.id.videoId,
+        },
+      },
+    }));
+    return { ...res.data, items: data };
   }
 
   async getSearchVideoListAPI(title: string, _pageParam: string) {
