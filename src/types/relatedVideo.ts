@@ -1,10 +1,10 @@
-export interface ChannelData {
+export interface RelatedVideoList {
   kind: string;
   etag: string;
   nextPageToken: string;
   regionCode: string;
   pageInfo: PageInfo;
-  items: ChannelItem[];
+  items: RelatedVideoItem[];
 }
 
 export interface PageInfo {
@@ -12,7 +12,7 @@ export interface PageInfo {
   resultsPerPage: number;
 }
 
-export interface ChannelItem {
+export interface RelatedVideoItem {
   kind: string;
   etag: string;
   id: Id;

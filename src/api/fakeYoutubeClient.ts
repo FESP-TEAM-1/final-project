@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ChannelData, ChannelItem } from "types/detailItem";
+import { RelatedVideoList, RelatedVideoItem } from "types/relatedVideo";
 import { YoutubeItem } from "types/popularVideo";
 
 export default class FakeYoutubeClient {
@@ -12,11 +12,11 @@ export default class FakeYoutubeClient {
     if (filterData.length) {
       return filterData[0];
     } else {
-      const { data } = await axios.get<ChannelData>(
+      const { data } = await axios.get<RelatedVideoList>(
         `/videos/searchByChannels/search-by-channel-id-${channelId}.json`
       );
       const filterData = data.items.filter(
-        (item: ChannelItem) => item.id.videoId === videoId
+        (item: RelatedVideoItem) => item.id.videoId === videoId
       );
       return filterData[0];
     }
@@ -26,8 +26,8 @@ export default class FakeYoutubeClient {
     return await axios.get("/videos/popular.json");
   }
 
-  async getChannelDataAPI(channelId: string, _pageParam: string) {
-    const res = await axios<ChannelData>(
+  async getRelatedVideoListAPI(channelId: string, _pageParam: string) {
+    const res = await axios<RelatedVideoList>(
       `/videos/searchByChannels/search-by-channel-id-${channelId}.json`
     );
 
@@ -45,12 +45,16 @@ export default class FakeYoutubeClient {
 
   async getSearchVideoListAPI(title: string, _pageParam: string) {
     const titleToLowerCase = title.toLowerCase();
-    let data, filteredItems;
-    const res = await axios.get("/videos/popular.json");
-    data = res.data;
-    filteredItems = data.items.filter((i: YoutubeItem) =>
+    const { data } = await axios.get("/videos/popular.json");
+
+    let filteredItems = data.items.filter((i: YoutubeItem) =>
       i.snippet.title.toLowerCase().includes(titleToLowerCase)
     );
-    return { items: filteredItems };
+    filteredItems = filteredItems.map((item: YoutubeItem) => ({
+      ...item,
+      id: { videoId: item.id },
+    }));
+
+    return { items: [...filteredItems] };
   }
 }

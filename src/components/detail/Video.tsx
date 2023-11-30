@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { VideoSkeleton } from "./skeleton";
-import { YoutubeItem, Snippet } from "types/mainItem";
+import { YoutubeItem, Snippet } from "types/popularVideo";
 import useYoutubeApiStore from "stores/useYoutubeApiStore";
 import decodeHTMLEntities from "utils/setDecodeHTMLEntities";
 import styles from "styles/detail/Video.module.css";

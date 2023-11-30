@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ChannelItem } from "types/detailItem";
+import { RelatedVideoItem } from "types/relatedVideo";
 import getElapsedTime from "utils/getElapsedTime";
 import decodeHTMLEntities from "utils/setDecodeHTMLEntities";
 import useImgLazyLoading from "hooks/useImgLazyLoading";
@@ -8,7 +8,7 @@ import useHandleHover from "hooks/useHandleHover";
 import styles from "styles/detail/RelatedCard.module.css";
 
 interface RelatedCardType {
-  item: ChannelItem;
+  item: RelatedVideoItem;
 }
 
 const RelatedCard: React.FC<RelatedCardType> = ({ item }) => {

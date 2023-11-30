@@ -4,17 +4,17 @@ import useImgLazyLoading from "hooks/useImgLazyLoading";
 import useHandleHover from "hooks/useHandleHover";
 import getElapsedTime from "utils/getElapsedTime";
 import decodeHTMLEntities from "utils/setDecodeHTMLEntities";
-import { YoutubeItem } from "types/popularVideo";
+import { SearchItem } from "types/popularVideo";
 import styles from "styles/search/SearchCard.module.css";
 
 interface PropsType {
-  item: YoutubeItem;
+  item: SearchItem;
 }
 
 const SearchCard: React.FC<PropsType> = ({ item }) => {
   const navigate = useNavigate();
   const { url: src } = item.snippet.thumbnails.high;
-  const { id: videoId } = item;
+  const { videoId } = item.id;
   const { title, channelTitle, channelId, publishedAt, description } =
     item.snippet;
 

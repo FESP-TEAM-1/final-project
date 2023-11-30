@@ -22,8 +22,8 @@ export default class Youtube {
   }
 
   // 채널 영상 리스트 조회
-  async getChannelData(channelId: string, pageParam: string) {
-    return this.apiClient.getChannelDataAPI(channelId, pageParam);
+  async getRelatedVideoList(channelId: string, pageParam: string) {
+    return this.apiClient.getRelatedVideoListAPI(channelId, pageParam);
   }
 
   // 검색 영상 리스트 조회
