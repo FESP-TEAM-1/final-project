@@ -55,11 +55,7 @@ const Header = () => {
             )}
             <h1>
               <Link to="/" className={styles["header-logo"]}>
-                <img
-                  src={
-                    "https://fesp-team-1.github.io/final-project/logo-477tube.svg"
-                  }
-                />
+                <img src={"/logo-477tube.svg"} />
                 <span className={styles["header-title"]}>477Tube</span>
               </Link>
             </h1>
