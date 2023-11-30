@@ -56,7 +56,7 @@ const Header = () => {
             <h1>
               <Link to="/" className={styles["header-logo"]}>
                 <img src={"/logo-477tube.svg"} />
-                <span>477Tube</span>
+                <span className={styles["header-title"]}>477Tube</span>
               </Link>
             </h1>
           </div>
