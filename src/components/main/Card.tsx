@@ -4,7 +4,7 @@ import { useThemeStore } from "stores/useThemeStore";
 import getElapsedTime from "utils/getElapsedTime";
 import decodeHTMLEntities from "utils/setDecodeHTMLEntities";
 import useHandleMainHover from "hooks/useHandleMainHover";
-import { YoutubeItem } from "types/mainItem";
+import { YoutubeItem } from "types/popularVideo";
 import styles from "styles/main/Card.module.css";
 import useImgLazyLoading from "hooks/useImgLazyLoading";
 
@@ -18,7 +18,8 @@ const Card: React.FC<CardItemType> = ({ item }) => {
     isElementSingle,
     isElementOnFarRight,
     isElementOnFarLeft,
-    handleHover,
+    handleEnterAutoPlay,
+    handleLeaveAutoPlay,
   } = useHandleMainHover();
   const imgRef = useRef<HTMLImageElement>(null);
   const navigate = useNavigate();
@@ -42,8 +43,8 @@ const Card: React.FC<CardItemType> = ({ item }) => {
         } ${isElementOnFarLeft ? styles["card-left"] : ""} ${
           isElementOnFarRight ? styles["card-right"] : ""
         }`}
-        onMouseEnter={(e) => handleHover(e, "enter")}
-        onMouseLeave={(e) => handleHover(e, "leave")}
+        onMouseEnter={(e) => handleEnterAutoPlay(e, "enter")}
+        onMouseLeave={(e) => handleLeaveAutoPlay(e, "leave")}
         style={{ backgroundColor: darkMode ? "#0f0f0f" : "#fff" }}
       >
         <div className={styles["card__cover"]} onClick={handleClickMove}>

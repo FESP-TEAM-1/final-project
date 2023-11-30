@@ -12,7 +12,8 @@ interface RelatedCardType {
 }
 
 const RelatedCard: React.FC<RelatedCardType> = ({ item }) => {
-  const { isHover, handleHover } = useHandleHover();
+  const { isHover, handleEnterAutoPlay, handleLeaveAutoPlay } =
+    useHandleHover();
   const imgRef = useRef<HTMLImageElement>(null);
   useImgLazyLoading(imgRef);
 
@@ -29,8 +30,8 @@ const RelatedCard: React.FC<RelatedCardType> = ({ item }) => {
     <>
       <article
         className={styles["card"]}
-        onMouseEnter={() => handleHover("enter")}
-        onMouseLeave={() => handleHover("leave")}
+        onMouseEnter={handleEnterAutoPlay}
+        onMouseLeave={handleLeaveAutoPlay}
       >
         <div className={styles["card__cover"]} onClick={handleClickMove}>
           {isHover ? (
