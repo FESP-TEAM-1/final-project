@@ -29,7 +29,7 @@ export default class YoutubeClient {
     return await this.httpClient.get("videos", { params });
   }
 
-  async getChannelDataAPI(channelId: string, pageParam: string) {
+  async getRelatedVideoListAPI(channelId: string, pageParam: string) {
     const paramsChannels = {
       part: "contentDetails",
       id: channelId,

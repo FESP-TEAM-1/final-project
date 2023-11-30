@@ -19,6 +19,7 @@ const GlobalStyle = createGlobalStyle`
     overflow: hidden;
     text-overflow: ellipsis;
     line-height: 1.5;
+    word-break: break-all;
   }
 
   .ellipsis-multi {
@@ -27,6 +28,7 @@ const GlobalStyle = createGlobalStyle`
     -webkit-box-orient: vertical;
     overflow: hidden;
     line-height: 1.5;
+    word-break: break-all;
   }
 
   .dim {

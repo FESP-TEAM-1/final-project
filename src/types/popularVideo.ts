@@ -5,6 +5,17 @@ export interface YoutubeItem {
   snippet: Snippet;
 }
 
+export interface SearchItem {
+  kind: string;
+  etag: string;
+  id: Id;
+  snippet: Snippet;
+}
+
+interface Id {
+  videoId: string;
+}
+
 export interface Snippet {
   publishedAt: string;
   channelId: string;

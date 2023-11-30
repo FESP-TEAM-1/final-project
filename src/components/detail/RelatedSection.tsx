@@ -15,12 +15,13 @@ const RelatedSection: React.FC = () => {
 
   const {
     status,
-    data: channelData,
+    data: relatedVideoList,
     error,
     fetchNextPage,
   } = useInfiniteQuery({
-    queryKey: ["channelData", channelId],
-    queryFn: ({ pageParam }) => youtube.getChannelData(channelId, pageParam),
+    queryKey: ["relatedVideoList", channelId],
+    queryFn: ({ pageParam }) =>
+      youtube.getRelatedVideoList(channelId, pageParam),
     initialPageParam: "",
     getNextPageParam: (lastPage) => lastPage.nextPageToken || undefined,
   });
@@ -35,7 +36,7 @@ const RelatedSection: React.FC = () => {
     <>
       <h2 className={styles["related-title"]}>관련된 영상</h2>
       <ul>
-        {channelData?.pages
+        {relatedVideoList?.pages
           .flatMap((page) => page.items)
           .map((item, i) => {
             if (item.snippet.resourceId.videoId === videoId) return;
