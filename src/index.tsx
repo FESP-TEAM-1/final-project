@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import reportWebVitals from "./reportWebVitals";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import router from "Router";
 import { RouterProvider } from "react-router-dom";
@@ -19,5 +18,3 @@ root.render(
     </QueryClientProvider>
   </React.StrictMode>
 );
-
-reportWebVitals();

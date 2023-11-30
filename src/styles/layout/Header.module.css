@@ -48,15 +48,6 @@
   border-radius: 50%;
 }
 
-@media screen and (max-width: 768px) {
-  .header-center.search-bar {
-    display: none;
-  }
-  .header-right .search__button {
-    display: block;
-  }
-}
-
 .header button {
   width: 42px;
   height: 42px;
@@ -125,4 +116,25 @@
 
 .back-button {
   margin-right: 0.5rem;
+}
+
+@media screen and (max-width: 768px) {
+  .header-center.search-bar {
+    display: none;
+  }
+  .header-right .search__button {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .header-title {
+    display: none;
+  }
+  .header-center.search-bar {
+    display: none;
+  }
+  .header-right .search__button {
+    display: block;
+  }
 }

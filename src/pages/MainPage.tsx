@@ -28,6 +28,7 @@ const MainPage: React.FC = () => {
 
   return (
     <main className={styles.main}>
+      <h2 className="a11y-hidden">가장 인기 있는 영상</h2>
       {youtubeData.pages
         .flatMap((page) => page.items)
         .map((item) => (
