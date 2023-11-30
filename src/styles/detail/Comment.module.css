@@ -43,22 +43,27 @@
   cursor: pointer;
 }
 
+.comment__button-list {
+  display: none;
+}
+
 .comment__ellipsis.active {
   display: block;
 }
 
-/* popup */
-.comment__button-list {
+.comment__ellipsis.active + .comment__button-list {
   display: flex;
   flex-direction: column;
   position: absolute;
   right: -4.25rem;
   top: 2.5625rem;
   width: 6.25rem;
-  border: 1px solid #eee;
   background-color: #eee;
   z-index: 10;
+  border-radius: 0.625rem;
+  overflow: hidden;
 }
+
 .comment__button-list button {
   padding: 10px 0;
 }

@@ -17,12 +17,16 @@
 .right-section {
   display: flex;
   flex-direction: column;
-  flex: 1;
+  /* flex: 1; */
+  width: 402px;
 }
 
-@media (max-width: 1050px) {
+@media (max-width: 1016px) {
   .detail-main {
     gap: 5rem;
     flex-direction: column;
+  }
+  .right-section {
+    width: auto;
   }
 }

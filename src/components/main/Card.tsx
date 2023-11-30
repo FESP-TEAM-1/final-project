@@ -1,9 +1,9 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useThemeStore } from "stores/useThemeStore";
 import getElapsedTime from "utils/getElapsedTime";
 import decodeHTMLEntities from "utils/setDecodeHTMLEntities";
-import useHoverHandler from "hooks/useHandleHover";
+import useHandleMainHover from "hooks/useHandleMainHover";
 import { YoutubeItem } from "types/mainItem";
 import styles from "styles/main/Card.module.css";
 import useImgLazyLoading from "hooks/useImgLazyLoading";
@@ -19,7 +19,7 @@ const Card: React.FC<CardItemType> = ({ item }) => {
     isElementOnFarRight,
     isElementOnFarLeft,
     handleHover,
-  } = useHoverHandler();
+  } = useHandleMainHover();
   const imgRef = useRef<HTMLImageElement>(null);
   const navigate = useNavigate();
   const { darkMode } = useThemeStore();
