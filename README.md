@@ -4,12 +4,12 @@
 
 |                            [신은수](https://github.com/Shineun9)                            |                            [윤태현](https://github.com/yoonth95)                            |                            [이보경](https://github.com/ebokyung)                            |
 | :-----------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: |
-| <img width="200" height="150" src="https://avatars.githubusercontent.com/u/75666099?v=4" /> | <img width="200" height="150" src="https://avatars.githubusercontent.com/u/78673090?v=4" /> | <img width="200" height="150" src="https://avatars.githubusercontent.com/u/90684277?v=4" /> |
+| <img width="300" height="300" src="https://avatars.githubusercontent.com/u/75666099?v=4" /> | <img width="300" height="300" src="https://avatars.githubusercontent.com/u/78673090?v=4" /> | <img width="300" height="300" src="https://avatars.githubusercontent.com/u/90684277?v=4" /> |
 
 <br>
 <br>
 
-## 📋목차
+## 목차
 
 1. [목표](#goal)
 2. [프로젝트 소개](#intro)
@@ -24,7 +24,7 @@
 <br>
 <br>
 
-## <span id="goal">목표<span>
+## <span id="goal">1. 목표<span>
 
 - Zustand, TanstackQuery 등 익숙하지 않은 라이브러리 사용 경험
 - 운영서버(YOUTUBE)인지 또는 개발서버(json 데이터)에 따라 개발
@@ -33,12 +33,11 @@
 <br>
 <br>
 
-## <span id="intro">프로젝트 소개</span>
+## <span id="intro">2. 프로젝트 소개</span>
 
-> Zustand, TanstackQuery, Supabase, YouTube Data API 를 활용하여
-> 동영상 시청이 가능한 반응형 웹 사이트 제작
+### Zustand, TanstackQuery, Supabase, YouTube Data API 를 활용하여 동영상 시청이 가능한 반응형 웹 사이트 제작
 
-### [477Tube 테스트 하러가기](https://477tube.netlify.app/)
+### [🔗 477Tube 테스트 하러가기](https://477tube.netlify.app/)
 
 <br>
 
@@ -71,7 +70,7 @@
 <br>
 <br>
 
-## <span id='tech'>기술 스택</span>
+## <span id='tech'>3. 기술 스택</span>
 
 ### Environment
 
@@ -101,7 +100,7 @@
 
 <br>
 
-## <span id='screen'>화면 구성</span>
+## <span id='screen'>4. 화면 구성</span>
 
 | <img height="120" alt="image" src="https://github.com/yoonth95/Web-Builder/assets/78673090/f750823a-e0b7-433f-954d-68af341f97d0"> | <img height="120" alt="image" src="https://github.com/yoonth95/Web-Builder/assets/78673090/9ca2c9bd-b0e7-41ee-822f-7195ac3787a1"> | <img height="120" alt="image" src="https://github.com/yoonth95/Web-Builder/assets/78673090/71965a25-9c12-4d7d-b512-f126c46dbb88"> |
 | :-------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------: |
@@ -109,7 +108,7 @@
 
 <br>
 
-## <span id='feature'>주요 기능</span>
+## <span id='feature'>5. 주요 기능</span>
 
 - 다크모드 <br>
 - 반응형<br>
@@ -119,29 +118,29 @@
 - 댓글 추가/삭제 기능 <br>
   <br>
 
-### 1. 메인 페이지 <br>
+### 1) 메인 페이지 <br>
 
 <img width='640' alt="image" src="https://github.com/FESP-TEAM-1/final-project/assets/90684277/200b8d5b-5e5e-49ee-bb49-73a30b72a3cd">
 
-### 2. 상세 페이지 <br>
+### 2) 상세 페이지 <br>
 
 <img width='640' alt="image" src="https://github.com/FESP-TEAM-1/final-project/assets/90684277/3709eb21-2540-4382-87c3-5f7c9a234018">
 
-### 3. 검색, 테마 <br>
+### 3) 검색, 테마 <br>
 
-<img width='640' alt="image" src="https://github.com/yoonth95/Web-Builder/assets/78673090/71965a25-9c12-4d7d-b512-f126c46dbb88">
-
-<br>
-
-## <span id='convention'>컨벤션</span>
-
-### [커밋 컨벤션](https://github.com/FESP-TEAM-1/final-project/wiki/%EC%BB%A4%EB%B0%8B-%EC%BB%A8%EB%B2%A4%EC%85%98)
-
-### [코드 컨벤션](https://github.com/FESP-TEAM-1/final-project/wiki/%EC%BD%94%EB%93%9C-%EC%BB%A8%EB%B2%A4%EC%85%98)
+<img width='640' alt="image" src="https://github.com/FESP-TEAM-1/final-project/assets/90684277/7976e977-2912-49dc-a2bb-69733295be2b">
 
 <br>
 
-## <span id='directory'>디렉토리 구조</span>
+## <span id='convention'>6. 컨벤션</span>
+
+### [📕 커밋 컨벤션](https://github.com/FESP-TEAM-1/final-project/wiki/%EC%BB%A4%EB%B0%8B-%EC%BB%A8%EB%B2%A4%EC%85%98)
+
+### [📘 코드 컨벤션](https://github.com/FESP-TEAM-1/final-project/wiki/%EC%BD%94%EB%93%9C-%EC%BB%A8%EB%B2%A4%EC%85%98)
+
+<br>
+
+## <span id='directory'>7. 디렉토리 구조</span>
 
 ```
 📦FESP-FINAL1
